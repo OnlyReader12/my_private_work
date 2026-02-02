@@ -1,0 +1,1201 @@
+Project Name,Package Name,Type Name,Method Name,Code Smell
+app,org.apache.roller.planet.business,PlanetManager,getEntries,Long Parameter List
+app,org.apache.roller.planet.business,EntryFunctionalTests,testEntryLookups,Magic Number
+app,org.apache.roller.planet.business,EntryFunctionalTests,testEntryLookups,Magic Number
+app,org.apache.roller.planet.business,EntryFunctionalTests,testEntryLookups,Magic Number
+app,org.apache.roller.planet.business,EntryFunctionalTests,testEntryLookups,Magic Number
+app,org.apache.roller.planet.business,EntryFunctionalTests,testEntryLookups,Magic Number
+app,org.apache.roller.planet.business,EntryFunctionalTests,testEntryLookups,Magic Number
+app,org.apache.roller.planet.business,EntryFunctionalTests,testDeleteEntries,Magic Number
+app,org.apache.roller.planet.business,GroupFunctionalTests,testGroupLookups,Magic Number
+app,org.apache.roller.planet.business,PlanetFunctionalTests,testPlanetLookups,Magic Number
+app,org.apache.roller.planet.business,SubscriptionFunctionalTests,testSubscriptionLookups,Magic Number
+app,org.apache.roller.planet.business,SubscriptionFunctionalTests,testSubscriptionGroupCRUD,Magic Number
+app,org.apache.roller.planet.business.fetcher,RomeFeedFetcher,RomeFeedFetcher,Magic Number
+app,org.apache.roller.planet.business.fetcher,RomeFeedFetcher,fetchSubscription,Complex Conditional
+app,org.apache.roller.planet.business.fetcher,RomeFeedFetcher,fetchSubscription,Complex Method
+app,org.apache.roller.planet.business.fetcher,RomeFeedFetcher,buildEntry,Complex Method
+app,org.apache.roller.planet.business.jpa,JPAPlanetImpl,JPAPlanetImpl,Long Parameter List
+app,org.apache.roller.planet.business.jpa,JPAPlanetManagerImpl,getGroup,Magic Number
+app,org.apache.roller.planet.business.jpa,JPAPlanetManagerImpl,getEntries,Long Parameter List
+app,org.apache.roller.planet.business.jpa,JPAPlanetManagerImpl,getEntries,Long Statement
+app,org.apache.roller.planet.business.updater,SingleThreadedFeedUpdater,updateSubscription,Complex Conditional
+app,org.apache.roller.planet.business.updater,SingleThreadedFeedUpdater,updateSubscription,Long Statement
+app,org.apache.roller.planet.business.updater,SingleThreadedFeedUpdater,updateSubscription,Long Statement
+app,org.apache.roller.planet.pojos,PlanetGroup,getRecentEntries,Magic Number
+app,org.apache.roller.planet.util,MailUtil,sendMessage,Complex Method
+app,org.apache.roller.planet.util,MailUtil,sendMessage,Long Parameter List
+app,org.apache.roller.planet.util,MailUtil,sendTextMessage,Long Parameter List
+app,org.apache.roller.planet.util,MailUtil,sendTextMessage,Long Parameter List
+app,org.apache.roller.planet.util,MailUtil,sendTextMessage,Long Parameter List
+app,org.apache.roller.planet.util,MailUtil,sendHTMLMessage,Long Parameter List
+app,org.apache.roller.planet.util,MailUtil,sendHTMLMessage,Long Parameter List
+app,org.apache.roller.planet.util,MailUtil,sendHTMLMessage,Long Parameter List
+app,org.apache.roller.util,DateUtil,getNoonOfDay,Magic Number
+app,org.apache.roller.util,DateUtil,formatIso8601,Magic Number
+app,org.apache.roller.util,DateUtil,formatIso8601,Magic Number
+app,org.apache.roller.util,DateUtil,parseWeblogURLDateString,Complex Conditional
+app,org.apache.roller.util,DateUtil,parseWeblogURLDateString,Complex Conditional
+app,org.apache.roller.util,DateUtil,parseWeblogURLDateString,Magic Number
+app,org.apache.roller.util,DateUtil,parseWeblogURLDateString,Magic Number
+app,org.apache.roller.util,ISO8601DateParser,parse,Magic Number
+app,org.apache.roller.util,ISO8601DateParser,toString,Magic Number
+app,org.apache.roller.util,ISO8601DateParser,toString,Magic Number
+app,org.apache.roller.util,PropertyExpander,expandProperties,Magic Number
+app,org.apache.roller.util,RegexUtil,obfuscateEmail,Magic Number
+app,org.apache.roller.util,RegexUtil,obfuscateEmail,Magic Number
+app,org.apache.roller.util,RegexUtil,obfuscateEmail,Magic Number
+app,org.apache.roller.util,RegexUtil,obfuscateEmail,Magic Number
+app,org.apache.roller.util,RegexUtil,obfuscateEmail,Magic Number
+app,org.apache.roller.util,RegexUtil,encode,Magic Number
+app,org.apache.roller.util,RegexUtil,encode,Magic Number
+app,org.apache.roller.util,DerbyManager,startDerby,Empty catch clause
+app,org.apache.roller.util,DerbyManager,startDerby,Long Statement
+app,org.apache.roller.util,DerbyManager,startDerby,Magic Number
+app,org.apache.roller.util,DerbyManager,stopDerby,Empty catch clause
+app,org.apache.roller.util,PropertyExpanderTest,testExpansion,Long Statement
+app,org.apache.roller.util,PropertyExpanderTest,testExpansion,Long Statement
+app,org.apache.roller.util,RegexUtilTest,testHexEmail,Long Statement
+app,org.apache.roller.weblogger.business,AbstractURLStrategy,getActionURL,Long Parameter List
+app,org.apache.roller.weblogger.business,DatabaseProvider,DatabaseProvider,Long Statement
+app,org.apache.roller.weblogger.business,DatabaseProvider,DatabaseProvider,Long Statement
+app,org.apache.roller.weblogger.business,DatabaseProvider,DatabaseProvider,Long Statement
+app,org.apache.roller.weblogger.business,FileContentManager,canSave,Long Parameter List
+app,org.apache.roller.weblogger.business,FileContentManagerImpl,canSave,Long Parameter List
+app,org.apache.roller.weblogger.business,FileContentManagerImpl,getDirSize,Complex Conditional
+app,org.apache.roller.weblogger.business,FileContentManagerImpl,checkFileType,Complex Method
+app,org.apache.roller.weblogger.business,GuiceWebloggerProvider,GuiceWebloggerProvider,Long Statement
+app,org.apache.roller.weblogger.business,GuiceWebloggerProvider,GuiceWebloggerProvider,Long Statement
+app,org.apache.roller.weblogger.business,HitCountQueue,HitCountQueue,Magic Number
+app,org.apache.roller.weblogger.business,MailProvider,getTransport,Complex Conditional
+app,org.apache.roller.weblogger.business,MultiWeblogURLStrategy,getWeblogCommentURL,Long Parameter List
+app,org.apache.roller.weblogger.business,MultiWeblogURLStrategy,getWeblogCollectionURL,Complex Method
+app,org.apache.roller.weblogger.business,MultiWeblogURLStrategy,getWeblogCollectionURL,Long Parameter List
+app,org.apache.roller.weblogger.business,MultiWeblogURLStrategy,getWeblogPageURL,Long Parameter List
+app,org.apache.roller.weblogger.business,MultiWeblogURLStrategy,getWeblogFeedURL,Long Parameter List
+app,org.apache.roller.weblogger.business,MultiWeblogURLStrategy,getWeblogSearchURL,Long Parameter List
+app,org.apache.roller.weblogger.business,PreviewURLStrategy,getWeblogCollectionURL,Complex Method
+app,org.apache.roller.weblogger.business,PreviewURLStrategy,getWeblogCollectionURL,Long Parameter List
+app,org.apache.roller.weblogger.business,PreviewURLStrategy,getWeblogPageURL,Complex Method
+app,org.apache.roller.weblogger.business,PreviewURLStrategy,getWeblogPageURL,Long Parameter List
+app,org.apache.roller.weblogger.business,TestTask,getLeaseTime,Magic Number
+app,org.apache.roller.weblogger.business,TestTask,getInterval,Magic Number
+app,org.apache.roller.weblogger.business,URLStrategy,getActionURL,Long Parameter List
+app,org.apache.roller.weblogger.business,URLStrategy,getWeblogCommentURL,Long Parameter List
+app,org.apache.roller.weblogger.business,URLStrategy,getWeblogCollectionURL,Long Parameter List
+app,org.apache.roller.weblogger.business,URLStrategy,getWeblogPageURL,Long Parameter List
+app,org.apache.roller.weblogger.business,URLStrategy,getWeblogFeedURL,Long Parameter List
+app,org.apache.roller.weblogger.business,URLStrategy,getWeblogSearchURL,Long Parameter List
+app,org.apache.roller.weblogger.business,UserManager,getUsers,Long Parameter List
+app,org.apache.roller.weblogger.business,WeblogEntryManager,getMostCommentedWeblogEntries,Long Parameter List
+app,org.apache.roller.weblogger.business,WeblogEntryManager,removeMatchingComments,Long Parameter List
+app,org.apache.roller.weblogger.business,WeblogEntryManager,getTags,Long Parameter List
+app,org.apache.roller.weblogger.business,WebloggerFactory,bootstrap,Long Statement
+app,org.apache.roller.weblogger.business,WebloggerImpl,WebloggerImpl,Long Parameter List
+app,org.apache.roller.weblogger.business,WeblogManager,getWeblogs,Long Parameter List
+app,org.apache.roller.weblogger.business,BookmarkTest,testBookmarkCRUD,Long Statement
+app,org.apache.roller.weblogger.business,BookmarkTest,testBookmarkCRUD,Long Statement
+app,org.apache.roller.weblogger.business,BookmarkTest,testBookmarkCRUD,Magic Number
+app,org.apache.roller.weblogger.business,BookmarkTest,_testBookmarkLookups,Magic Number
+app,org.apache.roller.weblogger.business,BookmarkTest,testMoveFolderContents,Magic Number
+app,org.apache.roller.weblogger.business,BookmarkTest,testBookmarkImport,Long Statement
+app,org.apache.roller.weblogger.business,CommentTest,testCommentLookups,Magic Number
+app,org.apache.roller.weblogger.business,CommentTest,testCommentLookups,Magic Number
+app,org.apache.roller.weblogger.business,CommentTest,testCommentLookups,Magic Number
+app,org.apache.roller.weblogger.business,CommentTest,testCommentLookups,Magic Number
+app,org.apache.roller.weblogger.business,FileContentManagerTest,testCanSave,Magic Number
+app,org.apache.roller.weblogger.business,FileContentManagerTest,testCanSave,Magic Number
+app,org.apache.roller.weblogger.business,FileContentManagerTest,testCanSave,Magic Number
+app,org.apache.roller.weblogger.business,FolderCRUDTest,testBasicCRUD,Magic Number
+app,org.apache.roller.weblogger.business,FolderFunctionalityTest,testLookupAllFoldersByWeblog,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHitCountCRUD,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHitCountCRUD,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHitCountCRUD,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHitCountCRUD,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHitCountLookups,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHitCountLookups,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHitCountLookups,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testIncrementHitCount,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testIncrementHitCount,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testIncrementHitCount,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testIncrementHitCount,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testResetHitCounts,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testResetHitCounts,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testResetHitCounts,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testResetHitCounts,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testResetHitCounts,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testResetHitCounts,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testResetHitCounts,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testResetHitCounts,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHotWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHotWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHotWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHotWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHotWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHotWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHotWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHotWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHotWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,HitCountTest,testHotWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testGetMediaFileDirectories,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testDeleteMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testDeleteMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testCreateMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testCreateMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Long Method
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFilePaging,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testSearchMediaFileOrderBy,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testUpdateMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testUpdateMediaFile,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testGetDirectoryContents,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testGetDirectoryContents,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testGetDirectoryContents,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testGetDirectoryContents,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testMoveDirectoryContents,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testMoveDirectoryContents,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testMoveDirectoryContents,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testMoveDirectoryContents,Magic Number
+app,org.apache.roller.weblogger.business,MediaFileTest,testStorageUpgrade,Long Statement
+app,org.apache.roller.weblogger.business,MediaFileTest,testDirectoryDeleteAssociation,Magic Number
+app,org.apache.roller.weblogger.business,PermissionTest,testPermissionsCRUD,Magic Number
+app,org.apache.roller.weblogger.business,PermissionTest,testPermissionsCRUD,Magic Number
+app,org.apache.roller.weblogger.business,PermissionTest,testInvitations,Magic Number
+app,org.apache.roller.weblogger.business,PingsTest,testPingTargetLookups,Magic Number
+app,org.apache.roller.weblogger.business,PlanetManagerLocalTest,testRefreshEntries,Magic Number
+app,org.apache.roller.weblogger.business,SQLScriptRunnerTest,testParseOnly,Long Statement
+app,org.apache.roller.weblogger.business,SQLScriptRunnerTest,testParseOnly,Magic Number
+app,org.apache.roller.weblogger.business,SQLScriptRunnerTest,testSimpleRun,Long Statement
+app,org.apache.roller.weblogger.business,SQLScriptRunnerTest,testSimpleRun,Long Statement
+app,org.apache.roller.weblogger.business,UserTest,testUserLookups,Magic Number
+app,org.apache.roller.weblogger.business,UserTest,testUserLookups,Magic Number
+app,org.apache.roller.weblogger.business,UserTest,testRoleCRUD,Magic Number
+app,org.apache.roller.weblogger.business,UserTest,testRoleCRUD,Magic Number
+app,org.apache.roller.weblogger.business,WeblogCategoryCRUDTest,testBasicCRUD,Magic Number
+app,org.apache.roller.weblogger.business,WeblogCategoryCRUDTest,testBasicCRUD,Magic Number
+app,org.apache.roller.weblogger.business,WeblogCategoryCRUDTest,testCategoryCascadingDelete,Magic Number
+app,org.apache.roller.weblogger.business,WeblogCategoryFunctionalityTest,testLookupAllCategoriesByWeblog,Magic Number
+app,org.apache.roller.weblogger.business,WeblogCategoryFunctionalityTest,testMoveWeblogCategoryContents,Magic Number
+app,org.apache.roller.weblogger.business,WeblogCategoryFunctionalityTest,testMoveWeblogCategoryContents,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Long Method
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogEntryLookups,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testAddMultipleTags,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testRemoveTagsViaShortcut,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testUpdateTags,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testUpdateTags,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testUpdateTags,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testUpdateTagTime,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testUpdateTagTime,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testUpdateTagTime,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Complex Method
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Long Method
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregates,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregatesCaseSensitivity,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregatesCaseSensitivity,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testTagAggregatesCaseSensitivity,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testEntryAttributeCRUD,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogStats,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogStats,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogStats,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogStats,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogStats,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogStats,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogStats,Magic Number
+app,org.apache.roller.weblogger.business,WeblogEntryTest,testWeblogStats,Magic Number
+app,org.apache.roller.weblogger.business,WeblogStatsTest,testGetMostCommentedWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,WeblogStatsTest,testGetMostCommentedWeblogs,Magic Number
+app,org.apache.roller.weblogger.business,WeblogStatsTest,testGetMostCommentedWeblogEntries,Magic Number
+app,org.apache.roller.weblogger.business,WeblogStatsTest,testGetMostCommentedWeblogEntries,Magic Number
+app,org.apache.roller.weblogger.business,WeblogTest,testWeblogLookups,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAAutoPingManagerImpl,removeAutoPing,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPABookmarkManagerImpl,saveFolder,Complex Conditional
+app,org.apache.roller.weblogger.business.jpa,JPABookmarkManagerImpl,importOpmlElement,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPABookmarkManagerImpl,getFolder,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPABookmarkManagerImpl,getFolder,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPABookmarkManagerImpl,getDefaultFolder,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPABookmarkManagerImpl,getDefaultFolder,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPABookmarkManagerImpl,getAllFolders,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAMediaFileManagerImpl,getMediaFileDirectoryByName,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAMediaFileManagerImpl,getMediaFileDirectoryByName,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAMediaFileManagerImpl,getMediaFileByOriginalPath,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAMediaFileManagerImpl,searchMediaFiles,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAMediaFileManagerImpl,searchMediaFiles,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAMediaFileManagerImpl,searchMediaFiles,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAMediaFileManagerImpl,searchMediaFiles,Missing default
+app,org.apache.roller.weblogger.business.jpa,JPAMediaFileManagerImpl,searchMediaFiles,Missing default
+app,org.apache.roller.weblogger.business.jpa,JPAMediaFileManagerImpl,upgradeFileStorage,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAOAuthManagerImpl,getServiceProvider,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAOAuthManagerImpl,getConsumer,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAOAuthManagerImpl,getConsumerByKey,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAPersistenceStrategy,JPAPersistenceStrategy,Complex Conditional
+app,org.apache.roller.weblogger.business.jpa,JPAPersistenceStrategy,JPAPersistenceStrategy,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAPersistenceStrategy,refresh,Empty catch clause
+app,org.apache.roller.weblogger.business.jpa,JPAPingQueueManagerImpl,isAlreadyQueued,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAPropertiesManagerImpl,initialize,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAPropertiesManagerImpl,getProperties,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAPropertiesManagerImpl,initializeMissingProps,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAThreadManagerImpl,registerLease,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAThreadManagerImpl,registerLease,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAThreadManagerImpl,registerLease,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAThreadManagerImpl,registerLease,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAThreadManagerImpl,registerLease,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAThreadManagerImpl,registerLease,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAThreadManagerImpl,unregisterLease,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAThreadManagerImpl,unregisterLease,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,addUser,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getUserByUserName,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getUsers,Long Parameter List
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getUsers,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getUsers,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getUsers,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getUsers,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getUsersStartingWith,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getUsersStartingWith,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getUserNameLetterMap,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,checkPermission,Empty catch clause
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getWeblogPermission,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getWeblogPermissionIncludingPending,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getWeblogPermissionIncludingPending,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,grantWeblogPermission,Empty catch clause
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,grantWeblogPermission,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,grantWeblogPermission,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,grantWeblogPermissionPending,Empty catch clause
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,grantWeblogPermissionPending,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,grantWeblogPermissionPending,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,confirmWeblogPermission,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,confirmWeblogPermission,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,declineWeblogPermission,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,declineWeblogPermission,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,revokeWeblogPermission,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,revokeWeblogPermission,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,getWeblogPermissionsIncludingPending,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,hasRole,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAUserManagerImpl,revokeRole,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,saveWeblogEntry,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,saveWeblogEntry,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getNextPrevEntries,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getNextPrevEntries,Long Parameter List
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getWeblogEntries,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getWeblogEntriesPinnedToMain,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getWeblogEntriesPinnedToMain,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getWeblogEntryByAnchor,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,createAnchor,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getComments,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,removeMatchingComments,Long Parameter List
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getWeblogCategoryByName,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Long Identifier
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Long Parameter List
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getMostCommentedWeblogEntries,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,applyCommentDefaultsToEntries,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,applyCommentDefaultsToEntries,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getPopularTags,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getPopularTags,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getPopularTags,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getPopularTags,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getPopularTags,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getTags,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getTags,Long Identifier
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getTags,Long Parameter List
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,updateTagCount,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,updateTagCount,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,updateTagCount,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getHotWeblogs,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,resetHitCount,Empty catch clause
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getCommentCount,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogEntryManagerImpl,getEntryCount,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWebloggerImpl,JPAWebloggerImpl,Long Parameter List
+app,org.apache.roller.weblogger.business.jpa,JPAWebloggerImpl,JPAWebloggerImpl,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,removeWeblogContents,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,removeWeblogContents,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,updateTagAggregates,Empty catch clause
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,updateTagAggregates,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,addWeblogContents,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getWeblogByHandle,Complex Conditional
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getWeblogByHandle,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getWeblogs,Complex Method
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getWeblogs,Long Parameter List
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getUserWeblogs,Complex Conditional
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getTemplateByLink,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getTemplateByAction,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getTemplateByName,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getWeblogHandleLetterMap,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getMostCommentedWeblogs,Long Identifier
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getMostCommentedWeblogs,Long Statement
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getMostCommentedWeblogs,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getMostCommentedWeblogs,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getMostCommentedWeblogs,Magic Number
+app,org.apache.roller.weblogger.business.jpa,JPAWeblogManagerImpl,getMostCommentedWeblogs,Magic Number
+app,org.apache.roller.weblogger.business.pings,PingQueueProcessor,processQueue,Long Statement
+app,org.apache.roller.weblogger.business.pings,PingQueueProcessor,handlePingError,Long Statement
+app,org.apache.roller.weblogger.business.pings,PingQueueProcessor,handlePingError,Long Statement
+app,org.apache.roller.weblogger.business.pings,WeblogUpdatePinger,sendPing,Long Statement
+app,org.apache.roller.weblogger.business.plugins.entry,EncodePreTagsPlugin,render,Magic Number
+app,org.apache.roller.weblogger.business.plugins.entry,SmileysPlugin,init,Long Statement
+app,org.apache.roller.weblogger.business.plugins.entry,EncodePreTagsPluginTest,passthrough,Long Statement
+app,org.apache.roller.weblogger.business.plugins.entry,EncodePreTagsPluginTest,passthrough,Long Statement
+app,org.apache.roller.weblogger.business.plugins.entry,EncodePreTagsPluginTest,substitution2,Long Statement
+app,org.apache.roller.weblogger.business.plugins.entry,EncodePreTagsPluginTest,substitution2,Long Statement
+app,org.apache.roller.weblogger.business.plugins.entry,EncodePreTagsPluginTest,substitution3,Long Statement
+app,org.apache.roller.weblogger.business.plugins.entry,EncodePreTagsPluginTest,substitution3,Long Statement
+app,org.apache.roller.weblogger.business.runnable,TaskRunner,main,Magic Number
+app,org.apache.roller.weblogger.business.runnable,TaskRunner,main,Magic Number
+app,org.apache.roller.weblogger.business.runnable,TaskScheduler,run,Magic Number
+app,org.apache.roller.weblogger.business.runnable,TaskScheduler,run,Magic Number
+app,org.apache.roller.weblogger.business.runnable,TaskScheduler,runTasks,Complex Method
+app,org.apache.roller.weblogger.business.runnable,TaskScheduler,runTasks,Magic Number
+app,org.apache.roller.weblogger.business.runnable,TaskScheduler,runTasks,Magic Number
+app,org.apache.roller.weblogger.business.runnable,ThreadManagerImpl,initialize,Magic Number
+app,org.apache.roller.weblogger.business.search,IndexManager,search,Long Parameter List
+app,org.apache.roller.weblogger.business.search,IndexManagerTest,testBasicOperation,Long Statement
+app,org.apache.roller.weblogger.business.search,IndexManagerTest,testBasicOperation,Long Statement
+app,org.apache.roller.weblogger.business.search,IndexManagerTest,testBasicOperation,Magic Number
+app,org.apache.roller.weblogger.business.search,IndexManagerTest,createWeblogEntries,Long Statement
+app,org.apache.roller.weblogger.business.search,IndexManagerTest,createWeblogEntries,Long Statement
+app,org.apache.roller.weblogger.business.search,IndexManagerTest,createWeblogEntries,Magic Number
+app,org.apache.roller.weblogger.business.search,IndexManagerTest,createWeblogEntries,Magic Number
+app,org.apache.roller.weblogger.business.search.lucene,IndexOperation,getDocument,Complex Method
+app,org.apache.roller.weblogger.business.search.lucene,IndexOperation,beginWriting,Long Statement
+app,org.apache.roller.weblogger.business.search.lucene,IndexUtil,getTerm,Empty catch clause
+app,org.apache.roller.weblogger.business.search.lucene,LuceneIndexManager,search,Long Parameter List
+app,org.apache.roller.weblogger.business.search.lucene,LuceneIndexManager,createIndex,Magic Number
+app,org.apache.roller.weblogger.business.search.lucene,LuceneIndexManager,convertHitsToEntryList,Complex Conditional
+app,org.apache.roller.weblogger.business.search.lucene,LuceneIndexManager,convertHitsToEntryList,Long Parameter List
+app,org.apache.roller.weblogger.business.search.lucene,RebuildWebsiteIndexOperation,doRun,Complex Method
+app,org.apache.roller.weblogger.business.search.lucene,SearchOperation,doRun,Long Statement
+app,org.apache.roller.weblogger.business.search.lucene,SearchOperation,doRun,Long Statement
+app,org.apache.roller.weblogger.business.search.lucene,SearchOperation,doRun,Long Statement
+app,org.apache.roller.weblogger.business.search.lucene,SearchOperation,doRun,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,isCreationRequired,Complex Conditional
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,isCreationRequired,Empty catch clause
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,isUpgradeRequired,Empty catch clause
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,createDatabase,Empty catch clause
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Complex Method
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Empty catch clause
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeDatabase,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Complex Method
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Method
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Long Statement
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo400,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo500,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo500,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo510,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo510,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo520,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo520,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo610,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,upgradeTo610,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,getDatabaseHandle,Complex Method
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,getDatabaseVersion,Empty catch clause
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,getDatabaseVersion,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,parseVersionString,Empty catch clause
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,parseVersionString,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,parseVersionString,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,parseVersionString,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,parseVersionString,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,setDatabaseVersion,Magic Number
+app,org.apache.roller.weblogger.business.startup,DatabaseInstaller,updateDatabaseVersion,Magic Number
+app,org.apache.roller.weblogger.business.themes,SharedThemeFromDir,loadThemeFromDisk,Complex Method
+app,org.apache.roller.weblogger.business.themes,SharedThemeFromDir,loadThemeFromDisk,Long Method
+app,org.apache.roller.weblogger.business.themes,SharedThemeFromDir,loadThemeFromDisk,Long Statement
+app,org.apache.roller.weblogger.business.themes,SharedThemeFromDir,loadThemeFromDisk,Long Statement
+app,org.apache.roller.weblogger.business.themes,SharedThemeFromDir,loadThemeFromDisk,Long Statement
+app,org.apache.roller.weblogger.business.themes,SharedThemeFromDir,loadThemeFromDisk,Long Statement
+app,org.apache.roller.weblogger.business.themes,SharedThemeFromDir,loadThemeFromDisk,Long Statement
+app,org.apache.roller.weblogger.business.themes,SharedThemeFromDir,loadThemeFromDisk,Long Statement
+app,org.apache.roller.weblogger.business.themes,SharedThemeFromDir,loadThemeFromDisk,Long Statement
+app,org.apache.roller.weblogger.business.themes,SharedThemeTemplate,SharedThemeTemplate,Long Parameter List
+app,org.apache.roller.weblogger.business.themes,ThemeManagerImpl,ThemeManagerImpl,Complex Conditional
+app,org.apache.roller.weblogger.business.themes,ThemeManagerImpl,importTheme,Complex Method
+app,org.apache.roller.weblogger.business.themes,ThemeManagerImpl,importTheme,Long Method
+app,org.apache.roller.weblogger.business.themes,ThemeManagerImpl,loadAllThemesFromDisk,Long Statement
+app,org.apache.roller.weblogger.business.themes,ThemeMetadataParser,unmarshall,Complex Method
+app,org.apache.roller.weblogger.business.themes,ThemeMetadataParser,elementToTemplateMetadata,Complex Method
+app,org.apache.roller.weblogger.business.themes,WeblogCustomTheme,getResource,Empty catch clause
+app,org.apache.roller.weblogger.business.themes,WeblogSharedTheme,getStylesheet,Long Statement
+app,org.apache.roller.weblogger.business.themes,WeblogSharedTheme,getResource,Empty catch clause
+app,org.apache.roller.weblogger.config,PingConfig,getQueueProcessingIntervalMins,Long Identifier
+app,org.apache.roller.weblogger.config,PingConfig,getQueueProcessingIntervalMins,Long Statement
+app,org.apache.roller.weblogger.config,PingConfig,getDisablePingUsage,Long Identifier
+app,org.apache.roller.weblogger.config,PingConfig,getSuspendPingProcessing,Long Identifier
+app,org.apache.roller.weblogger.config,PingConfig,initializeCommonTargets,Complex Method
+app,org.apache.roller.weblogger.config,PingConfig,initializeCommonTargets,Long Identifier
+app,org.apache.roller.weblogger.config,PingConfig,initializeCommonTargets,Long Statement
+app,org.apache.roller.weblogger.config,PingConfig,initializeCommonTargets,Long Statement
+app,org.apache.roller.weblogger.config,PingConfig,initializeCommonTargets,Magic Number
+app,org.apache.roller.weblogger.config,PingConfig,initializeCommonTargets,Magic Number
+app,org.apache.roller.weblogger.config,PingConfig,initializePingVariants,Complex Method
+app,org.apache.roller.weblogger.config,PingConfig,initializePingVariants,Long Statement
+app,org.apache.roller.weblogger.config,PingConfig,initializePingVariants,Long Statement
+app,org.apache.roller.weblogger.config,PingConfig,initializePingVariants,Magic Number
+app,org.apache.roller.weblogger.config,PingConfig,initializePingVariants,Magic Number
+app,org.apache.roller.weblogger.config,PingConfig,getIntegerProperty,Long Statement
+app,org.apache.roller.weblogger.config,PingConfig,getIntegerProperty,Long Statement
+app,org.apache.roller.weblogger.config,PingConfig,getIntegerProperty,Long Statement
+app,org.apache.roller.weblogger.config,PingConfig,getBooleanProperty,Long Statement
+app,org.apache.roller.weblogger.config.runtime,PropertyDef,setRows,Empty catch clause
+app,org.apache.roller.weblogger.config.runtime,PropertyDef,setCols,Empty catch clause
+app,org.apache.roller.weblogger.planet.business,WebloggerRomeFeedFetcher,fetchSubscription,Complex Method
+app,org.apache.roller.weblogger.planet.business,WebloggerRomeFeedFetcher,fetchSubscription,Magic Number
+app,org.apache.roller.weblogger.planet.tasks,SyncWebsitesTask,runTask,Long Statement
+app,org.apache.roller.weblogger.planet.ui,PlanetConfig,save,Complex Conditional
+app,org.apache.roller.weblogger.planet.ui,PlanetConfig,save,Complex Method
+app,org.apache.roller.weblogger.pojos,AutoPing,equals,Long Statement
+app,org.apache.roller.weblogger.pojos,CustomTemplateRendition,equals,Long Statement
+app,org.apache.roller.weblogger.pojos,GlobalPermission,implies,Complex Method
+app,org.apache.roller.weblogger.pojos,MediaFile,getThumbnailHeight,Complex Conditional
+app,org.apache.roller.weblogger.pojos,MediaFile,getThumbnailWidth,Complex Conditional
+app,org.apache.roller.weblogger.pojos,MediaFileComparator,compare,Missing default
+app,org.apache.roller.weblogger.pojos,MediaFileDirectory,equals,Long Statement
+app,org.apache.roller.weblogger.pojos,MediaFileDirectoryComparator,compare,Missing default
+app,org.apache.roller.weblogger.pojos,PingQueueEntry,PingQueueEntry,Long Parameter List
+app,org.apache.roller.weblogger.pojos,StatCount,StatCount,Long Parameter List
+app,org.apache.roller.weblogger.pojos,User,User,Long Parameter List
+app,org.apache.roller.weblogger.pojos,Weblog,Weblog,Long Parameter List
+app,org.apache.roller.weblogger.pojos,Weblog,toString,Long Statement
+app,org.apache.roller.weblogger.pojos,Weblog,getBookmarkFolder,Complex Conditional
+app,org.apache.roller.weblogger.pojos,WeblogBookmark,WeblogBookmark,Long Parameter List
+app,org.apache.roller.weblogger.pojos,WeblogBookmark,calculatePriority,Magic Number
+app,org.apache.roller.weblogger.pojos,WeblogBookmark,equals,Long Statement
+app,org.apache.roller.weblogger.pojos,WeblogCategory,calculatePosition,Magic Number
+app,org.apache.roller.weblogger.pojos,WeblogEntry,WeblogEntry,Long Parameter List
+app,org.apache.roller.weblogger.pojos,WeblogEntry,getComments,Empty catch clause
+app,org.apache.roller.weblogger.pojos,WeblogEntry,getRss09xDescription,Magic Number
+app,org.apache.roller.weblogger.pojos,WeblogEntry,createAnchorBase,Magic Number
+app,org.apache.roller.weblogger.pojos,WeblogEntry,displayContent,Complex Conditional
+app,org.apache.roller.weblogger.pojos,WeblogEntryComment,equals,Long Statement
+app,org.apache.roller.weblogger.pojos,WeblogEntryTag,WeblogEntryTag,Long Parameter List
+app,org.apache.roller.weblogger.pojos,WeblogPermission,implies,Complex Method
+app,org.apache.roller.weblogger.pojos,WeblogPermission,equals,Long Statement
+app,org.apache.roller.weblogger.pojos,WeblogTemplate,addTemplateRendition,Long Statement
+app,org.apache.roller.weblogger.pojos.wrapper,WeblogCategoryWrapper,retrieveWeblogEntries,Long Statement
+app,org.apache.roller.weblogger.pojos.wrapper,WeblogEntryWrapper,getCategories,Long Statement
+app,org.apache.roller.weblogger.pojos.wrapper,WeblogEntryWrapper,getTags,Long Statement
+app,org.apache.roller.weblogger.pojos.wrapper,WeblogEntryWrapper,getComments,Long Statement
+app,org.apache.roller.weblogger.pojos.wrapper,WeblogEntryWrapper,getComments,Long Statement
+app,org.apache.roller.weblogger.pojos.wrapper,WeblogWrapper,getStylesheet,Long Statement
+app,org.apache.roller.weblogger.pojos.wrapper,WeblogWrapper,getWeblogCategories,Long Statement
+app,org.apache.roller.weblogger.pojos.wrapper,WeblogWrapper,getRecentWeblogEntries,Long Statement
+app,org.apache.roller.weblogger.pojos.wrapper,WeblogWrapper,getRecentWeblogEntriesByTag,Long Statement
+app,org.apache.roller.weblogger.pojos.wrapper,WeblogWrapper,getRecentComments,Long Statement
+app,org.apache.roller.weblogger.ui.core,RollerContext,createPasswordEncoder,Complex Method
+app,org.apache.roller.weblogger.ui.core,RollerContext,createPasswordEncoder,Long Statement
+app,org.apache.roller.weblogger.ui.core,RollerContext,createPasswordEncoder,Long Statement
+app,org.apache.roller.weblogger.ui.core,RollerSession,getRollerSession,Complex Conditional
+app,org.apache.roller.weblogger.ui.core,RollerSession,getRollerSession,Complex Conditional
+app,org.apache.roller.weblogger.ui.core,RollerSession,getRollerSession,Complex Method
+app,org.apache.roller.weblogger.ui.core.filters,BootstrapFilter,doFilter,Complex Conditional
+app,org.apache.roller.weblogger.ui.core.filters,BootstrapFilter,doFilter,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,BootstrapFilter,isInstallUrl,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,CustomOpenIDAuthenticationProcessingFilter,lookupRealm,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,InitFilter,getAbsoluteUrl,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,InitFilter,getAbsoluteUrl,Long Parameter List
+app,org.apache.roller.weblogger.ui.core.filters,LoadSaltFilter,doFilter,Magic Number
+app,org.apache.roller.weblogger.ui.core.filters,LoadSaltFilterTest,testDoFilterGeneratesSalt,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,LoadSaltFilterTest,testDoFilterWithNullRollerSession,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,ValidateSaltFilterTest,testDoFilterWithPostMethodAndValidSalt,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,ValidateSaltFilterTest,testDoFilterWithPostMethodAndInvalidSalt,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,ValidateSaltFilterTest,testDoFilterWithPostMethodAndMismatchedUserId,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,ValidateSaltFilterTest,testDoFilterWithPostMethodAndNullRollerSession,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,ValidateSaltFilterTest,testDoFilterWithIgnoredURL,Long Statement
+app,org.apache.roller.weblogger.ui.core.filters,ValidateSaltFilterTest,testDoFilterWithIgnoredURL,Long Statement
+app,org.apache.roller.weblogger.ui.core.plugins,UIPluginManagerImpl,loadEntryEditorClasses,Long Statement
+app,org.apache.roller.weblogger.ui.core.security,BasicUserAutoProvision,hasNecessaryFields,Long Statement
+app,org.apache.roller.weblogger.ui.core.security,CustomUserRegistry,getUserDetailsFromAuthentication,Complex Conditional
+app,org.apache.roller.weblogger.ui.core.security,CustomUserRegistry,getUserDetailsFromAuthentication,Complex Method
+app,org.apache.roller.weblogger.ui.core.security,CustomUserRegistry,getUserDetailsFromAuthentication,Long Identifier
+app,org.apache.roller.weblogger.ui.core.security,CustomUserRegistry,getUserDetailsFromAuthentication,Long Statement
+app,org.apache.roller.weblogger.ui.core.security,RollerRememberMeAuthenticationProvider,RollerRememberMeAuthenticationProvider,Long Statement
+app,org.apache.roller.weblogger.ui.core.security,RollerRememberMeServices,RollerRememberMeServices,Long Statement
+app,org.apache.roller.weblogger.ui.core.security,RollerUserDetailsService,loadUserByUsername,Long Statement
+app,org.apache.roller.weblogger.ui.core.security,RollerUserDetailsService,loadUserByUsername,Long Statement
+app,org.apache.roller.weblogger.ui.core.tags.calendar,BigWeblogCalendarModel,getContent,Long Statement
+app,org.apache.roller.weblogger.ui.core.tags.calendar,BigWeblogCalendarModel,getContent,Magic Number
+app,org.apache.roller.weblogger.ui.core.tags.calendar,BigWeblogCalendarModel,getContent,Magic Number
+app,org.apache.roller.weblogger.ui.core.tags.calendar,BigWeblogCalendarModel,computeUrl,Long Statement
+app,org.apache.roller.weblogger.ui.core.tags.calendar,CalendarTag,doStartTag,Complex Conditional
+app,org.apache.roller.weblogger.ui.core.tags.calendar,CalendarTag,doStartTag,Complex Method
+app,org.apache.roller.weblogger.ui.core.tags.calendar,CalendarTag,doStartTag,Long Statement
+app,org.apache.roller.weblogger.ui.core.tags.calendar,CalendarTag,doStartTag,Long Statement
+app,org.apache.roller.weblogger.ui.core.tags.calendar,CalendarTag,doStartTag,Long Statement
+app,org.apache.roller.weblogger.ui.core.tags.calendar,CalendarTag,doStartTag,Long Statement
+app,org.apache.roller.weblogger.ui.core.tags.calendar,CalendarTag,doStartTag,Magic Number
+app,org.apache.roller.weblogger.ui.core.tags.calendar,CalendarTag,doStartTag,Magic Number
+app,org.apache.roller.weblogger.ui.core.tags.calendar,CalendarTag,buildDayNames,Magic Number
+app,org.apache.roller.weblogger.ui.core.tags.calendar,CalendarTag,buildDayNames,Magic Number
+app,org.apache.roller.weblogger.ui.core.tags.calendar,WeblogCalendarModel,parseWeblogURLDateString,Complex Conditional
+app,org.apache.roller.weblogger.ui.core.tags.calendar,WeblogCalendarModel,parseWeblogURLDateString,Complex Conditional
+app,org.apache.roller.weblogger.ui.core.tags.calendar,WeblogCalendarModel,parseWeblogURLDateString,Magic Number
+app,org.apache.roller.weblogger.ui.core.tags.calendar,WeblogCalendarModel,parseWeblogURLDateString,Magic Number
+app,org.apache.roller.weblogger.ui.core.tags.calendar,WeblogCalendarModel,computeUrl,Long Statement
+app,org.apache.roller.weblogger.ui.core.tags.calendar,WeblogCalendarModel,computeTodayMonthUrl,Long Statement
+app,org.apache.roller.weblogger.ui.core.util.menu,MenuHelper,buildMenu,Complex Conditional
+app,org.apache.roller.weblogger.ui.core.util.menu,MenuHelper,buildMenu,Complex Conditional
+app,org.apache.roller.weblogger.ui.core.util.menu,MenuHelper,buildMenu,Complex Conditional
+app,org.apache.roller.weblogger.ui.core.util.menu,MenuHelper,buildMenu,Complex Conditional
+app,org.apache.roller.weblogger.ui.core.util.menu,MenuHelper,buildMenu,Complex Conditional
+app,org.apache.roller.weblogger.ui.core.util.menu,MenuHelper,buildMenu,Complex Method
+app,org.apache.roller.weblogger.ui.core.util.menu,MenuHelper,buildMenu,Long Parameter List
+app,org.apache.roller.weblogger.ui.core.util.menu,MenuHelper,buildMenu,Long Statement
+app,org.apache.roller.weblogger.ui.core.util.menu,MenuHelper,buildMenu,Long Statement
+app,org.apache.roller.weblogger.ui.core.util.menu,MenuHelper,elementToParsedTab,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.mobile,MobileDeviceRepository,isMobileDevice,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.mobile,MobileDeviceRepository,isMobileDevice,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.mobile,MobileDeviceRepository,isMobileDevice,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.model,CalendarModel,init,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,FeedModel,FeedEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,FeedModel,FeedCommentsPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,FeedModel,FeedFilesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,FeedModel,FeedFilesPager,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.model,FeedEntriesPager,FeedEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,FeedCommentsPager,FeedCommentsPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,FeedFilesPager,FeedFilesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,FeedFilesPager,FeedFilesPager,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.model,PageModel,getWeblogEntriesPager,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.model,PageModel,getWeblogEntriesPager,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.model,PageModel,getWeblogEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,PageModel,getWeblogEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,PageModel,getWeblogEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,PageModel,getWeblogEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,PageModel,getWeblogEntriesPager,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.model,PageModel,getWeblogEntriesPager,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.model,PreviewPageModel,init,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,PreviewPageModel,getWeblogEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,PreviewPageModel,getWeblogEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,PreviewURLModel,init,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SearchResultsFeedModel,init,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SearchResultsFeedModel,init,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SearchResultsFeedModel,init,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SearchResultsModel,init,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SiteModel,getWeblogEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SiteModel,getWeblogEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SiteModel,getWeblogEntriesPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.model,SiteModel,getWeblogEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SiteModel,getWeblogEntriesPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SiteModel,getCommentsPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SiteModel,getUsersByLetterPager,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SiteModel,getNewWeblogs,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SiteModel,getHotWeblogs,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.model,SearchResultsFeedModelTest,testBasicOperation,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.model,SearchResultsModelTest,testBasicOperation,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,handleRequest,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,handleRequest,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,handleRequest,Complex Method
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,handleRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,handleRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,handleRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,handleRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,handleRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,handleRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,handleRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,calculateForwardUrl,Complex Method
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,calculateForwardUrl,Long Method
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,calculateForwardUrl,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,calculateForwardUrl,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,calculateForwardUrl,Missing default
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isWeblog,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isLocale,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isLocale,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isLocale,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isLocale,Long Statement
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering,WeblogRequestMapper,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,AbstractWeblogEntriesPager,AbstractWeblogEntriesPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,AbstractWeblogEntriesPager,AbstractWeblogEntriesPager,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,AbstractWeblogEntriesPager,parseDate,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.pagers,AbstractWeblogEntriesPager,parseDate,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.pagers,AbstractWeblogEntriesPager,parseDate,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,AbstractWeblogEntriesPager,parseDate,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,AbstractWeblogEntriesPager,createURL,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,CommentsPager,CommentsPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,PlanetEntriesPager,PlanetEntriesPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,SearchResultsFeedPager,SearchResultsFeedPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,SearchResultsFeedPager,SearchResultsFeedPager,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,SearchResultsPager,SearchResultsPager,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,UsersPager,UsersPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,UsersPager,UsersPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesDayPager,WeblogEntriesDayPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesDayPager,WeblogEntriesDayPager,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesDayPager,WeblogEntriesDayPager,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesDayPager,WeblogEntriesDayPager,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesLatestPager,WeblogEntriesLatestPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesListPager,WeblogEntriesListPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesMonthPager,WeblogEntriesMonthPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesPermalinkPager,WeblogEntriesPermalinkPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesPermalinkPager,getNextName,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesPermalinkPager,getNextName,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesPermalinkPager,getPrevName,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesPermalinkPager,getPrevName,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesPermalinkPager,getNextEntry,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesPermalinkPager,getNextEntry,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesPermalinkPager,getPrevEntry,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesPermalinkPager,getPrevEntry,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogEntriesPreviewPager,WeblogEntriesPreviewPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogsPager,WeblogsPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.pagers,WeblogsPager,WeblogsPager,Long Parameter List
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,AkismetCommentValidator,validate,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,LdapCommentAuthenticator,authenticate,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,LdapCommentAuthenticator,authenticate,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,LdapCommentAuthenticator,validateUsernamePass,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,LdapCommentAuthenticator,validateRollerProperties,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,LdapCommentAuthenticator,validateRollerProperties,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,MathCommentAuthenticator,getHtml,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,MathCommentAuthenticator,getHtml,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,MathCommentAuthenticator,getHtml,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,MathCommentAuthenticator,authenticate,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,TrackbackLinkbackCommentValidator,validate,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,TrackbackLinkbackCommentValidator,validate,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.plugins.comments,TrackbackLinkbackCommentValidator,validate,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,CommentServlet,init,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.servlets,CommentServlet,init,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.servlets,CommentServlet,doPost,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,CommentServlet,doPost,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,CommentServlet,doPost,Long Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,CommentServlet,doPost,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,CommentServlet,doPost,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,CommentServlet,doPost,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,FeedServlet,doGet,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,FeedServlet,doGet,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,FeedServlet,doGet,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,FeedServlet,doGet,Long Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,FeedServlet,doGet,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,MediaResourceServlet,doGet,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,init,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Long Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,doGet,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,processReferrer,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,processReferrer,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,processReferrer,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,processReferrer,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,processReferrer,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.servlets,PageServlet,processReferrer,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.servlets,PlanetFeedServlet,doGet,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,PlanetFeedServlet,doGet,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,PlanetFeedServlet,doGet,Long Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,PreviewResourceServlet,doGet,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,PreviewServlet,doGet,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,PreviewServlet,doGet,Long Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,PreviewServlet,doGet,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,PreviewServlet,doGet,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,PreviewServlet,doGet,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,ResourceServlet,doGet,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,SearchServlet,doGet,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,SearchServlet,doGet,Long Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,SearchServlet,doGet,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,TrackbackServlet,doPost,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.servlets,TrackbackServlet,doPost,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.servlets,TrackbackServlet,doPost,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,TrackbackServlet,doPost,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.servlets,TrackbackServlet,doPost,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util.cache,PlanetCache,PlanetCache,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.util.cache,PlanetCache,generateKey,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util.cache,SiteWideCache,generateKey,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.util.cache,SiteWideCache,generateKey,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util.cache,SiteWideCache,generateKey,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util.cache,WeblogFeedCache,generateKey,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util.cache,WeblogPageCache,generateKey,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.util.cache,WeblogPageCache,generateKey,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,ModDateHeaderUtil,respondIfNotModified,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.util,ModDateHeaderUtil,respondIfNotModified,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogCommentRequest,WeblogCommentRequest,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogCommentRequest,WeblogCommentRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogFeedRequest,WeblogFeedRequest,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogFeedRequest,WeblogFeedRequest,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogFeedRequest,WeblogFeedRequest,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogFeedRequest,WeblogFeedRequest,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogFeedRequest,WeblogFeedRequest,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogFeedRequest,WeblogFeedRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogFeedRequest,WeblogFeedRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPageRequest,WeblogPageRequest,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPageRequest,WeblogPageRequest,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPageRequest,WeblogPageRequest,Long Method
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPageRequest,WeblogPageRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPageRequest,WeblogPageRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPageRequest,WeblogPageRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPageRequest,isValidDateString,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPageRequest,isValidDateString,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPageRequest,isValidDateString,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPreviewRequest,getTheme,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPreviewRequest,getWeblogEntry,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogPreviewResourceRequest,getTheme,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,WeblogRequest,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,WeblogRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,WeblogRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,WeblogRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,WeblogRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,isLocale,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,isLocale,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,isLocale,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,isLocale,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,isLocale,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogRequest,getLocaleInstance,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogSearchRequest,WeblogSearchRequest,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogTrackbackRequest,WeblogTrackbackRequest,Complex Conditional
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogTrackbackRequest,WeblogTrackbackRequest,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogTrackbackRequest,WeblogTrackbackRequest,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.util,WeblogTrackbackRequest,WeblogTrackbackRequest,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,CommentValidatorTest,testExcessSizeCommentValidator,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,CommentValidatorTest,testExcessSizeCommentValidator,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,CommentValidatorTest,testExcessSizeCommentValidator,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,CommentValidatorTest,testExcessLinksCommentValidator,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.util,CommentValidatorTest,testExcessLinksCommentValidator,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,CommentValidatorTest,testExcessLinksCommentValidator,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,CommentValidatorTest,testBannedwordslistCommentValidator,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util,CommentValidatorTest,testBannedwordslistCommentValidator,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util.mobile,DeviceUtils,getRequiredCurrentDevice,Long Statement
+app,org.apache.roller.weblogger.ui.rendering.util.mobile,LiteDeviceResolver,resolveDevice,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.util.mobile,LiteDeviceResolver,resolveDevice,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util.mobile,LiteDeviceResolver,resolveDevice,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.util.mobile,LiteDeviceResolver,init,Long Identifier
+app,org.apache.roller.weblogger.ui.rendering.velocity,ThemeResourceLoader,getResourceReader,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.velocity,ThemeResourceLoader,getResourceReader,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.velocity,ThemeResourceLoader,getResourceReader,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.velocity,VelocityRendererFactory,getRenderer,Empty catch clause
+app,org.apache.roller.weblogger.ui.rendering.velocity,WebappResourceLoader,init,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.velocity,WebappResourceLoader,getResourceReader,Complex Method
+app,org.apache.roller.weblogger.ui.rendering.velocity,WebappResourceLoader,getResourceReader,Magic Number
+app,org.apache.roller.weblogger.ui.rendering.velocity,WebappResourceLoader,getCachedFile,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.admin,CreateUserBean,copyFrom,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.admin,GlobalCommentManagement,buildBaseUrl,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.admin,GlobalCommentManagement,delete,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.admin,GlobalCommentManagement,update,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.admin,GlobalCommentManagementBean,getStartDate,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.admin,GlobalCommentManagementBean,getEndDate,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.admin,GlobalConfig,save,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.admin,UserEdit,save,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.admin,UserEdit,save,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.admin,UserEdit,save,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.admin,UserEdit,save,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.admin,UserEdit,save,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.admin,UserEdit,save,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.admin,UserEdit,myValidate,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.admin,UserEdit,myValidate,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.admin,UserEdit,myValidate,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.ajax,CommentDataServlet,doPut,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.ajax,UserDataServlet,doGet,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.ajax,UserDataServlet,doGet,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.core,CreateWeblog,save,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.core,Install,getDatabaseProductName,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.core,Install,getDatabaseProductName,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.core,Profile,save,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.core,Profile,save,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.core,Profile,save,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.core,Profile,save,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.core,Profile,save,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.core,Profile,save,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.core,Profile,myValidate,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.core,Profile,myValidate,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.core,Profile,myValidate,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.core,Register,execute,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.core,Register,save,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.core,Register,retryActivationCode,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.core,Register,myValidate,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.core,Register,myValidate,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.core,Register,myValidate,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.editor,BookmarkEdit,myValidate,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.editor,BookmarkEdit,myValidate,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,BookmarksImport,save,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,Comments,buildBaseUrl,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,Comments,delete,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,Comments,update,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.editor,CommentsBean,getStartDate,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.editor,CommentsBean,getEndDate,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.editor,Entries,buildBaseUrl,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.editor,Entries,buildBaseUrl,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,Entries,getSortByOptions,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,Entries,getSortByOptions,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,EntriesBean,getStartDate,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.editor,EntriesBean,getEndDate,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.editor,EntryAddWithMediaFile,execute,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,EntryAddWithMediaFile,execute,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,EntryAddWithMediaFile,execute,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,EntryEdit,save,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.editor,EntryEdit,getPreviewURL,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,EntryEdit,trackback,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.editor,EntryEdit,getRecentEntries,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileAdd,myPrepare,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileAdd,save,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileAdd,save,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileSearchBean,copyTo,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileSearchBean,copyTo,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileSearchBean,copyTo,Missing default
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileView,myPrepare,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileView,myPrepare,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileView,myPrepare,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileView,myPrepare,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileView,myValidate,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.editor,MediaFileView,myValidate,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,Members,save,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.editor,MembersInvite,save,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.editor,StylesheetEdit,copyStylesheet,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.editor,StylesheetEdit,delete,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.editor,TemplateEdit,myValidate,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,TemplateEdit,myValidate,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,Templates,execute,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.editor,Templates,execute,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,Templates,remove,Complex Conditional
+app,org.apache.roller.weblogger.ui.struts2.editor,Templates,remove,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,Templates,myValidate,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,ThemeEdit,myPrepare,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,ThemeEdit,myPrepare,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,ThemeEdit,save,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.editor,ThemeEdit,isFirstCustomization,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.editor,WeblogConfig,save,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.util,UIAction,isUserIsAdmin,Empty catch clause
+app,org.apache.roller.weblogger.ui.struts2.util,UIAction,getHoursList,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.util,UIAction,getMinutesList,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.util,UIAction,getCommentDaysList,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.util,UIAction,getCommentDaysList,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.util,UIAction,getCommentDaysList,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.util,UIAction,getCommentDaysList,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.util,UIAction,getCommentDaysList,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.util,UIAction,getCommentDaysList,Magic Number
+app,org.apache.roller.weblogger.ui.struts2.util,UISecurityInterceptor,doIntercept,Complex Method
+app,org.apache.roller.weblogger.ui.struts2.util,UISecurityInterceptor,doIntercept,Long Statement
+app,org.apache.roller.weblogger.ui.struts2.util,UISecurityInterceptor,doIntercept,Long Statement
+app,org.apache.roller.weblogger.ui.tags,WordWrapTag,wordWrap,Complex Conditional
+app,org.apache.roller.weblogger.ui.tags,WordWrapTag,wordWrap,Complex Method
+app,org.apache.roller.weblogger.ui.tags,WordWrapTag,wordWrap,Long Parameter List
+app,org.apache.roller.weblogger.util,Bannedwordslist,downloadBannedwordslist,Complex Conditional
+app,org.apache.roller.weblogger.util,Bannedwordslist,downloadBannedwordslist,Long Statement
+app,org.apache.roller.weblogger.util,Bannedwordslist,loadBannedwordslistFromFile,Long Statement
+app,org.apache.roller.weblogger.util,BannedwordslistChecker,checkReferrer,Long Statement
+app,org.apache.roller.weblogger.util,BannedwordslistChecker,testComment,Complex Conditional
+app,org.apache.roller.weblogger.util,BannedwordslistChecker,testComment,Long Statement
+app,org.apache.roller.weblogger.util,BannedwordslistChecker,testComment,Long Statement
+app,org.apache.roller.weblogger.util,HTMLSanitizer,sanitizer,Complex Conditional
+app,org.apache.roller.weblogger.util,HTMLSanitizer,sanitizer,Complex Conditional
+app,org.apache.roller.weblogger.util,HTMLSanitizer,sanitizer,Complex Conditional
+app,org.apache.roller.weblogger.util,HTMLSanitizer,sanitizer,Complex Method
+app,org.apache.roller.weblogger.util,HTMLSanitizer,sanitizer,Long Method
+app,org.apache.roller.weblogger.util,HTMLSanitizer,sanitizer,Magic Number
+app,org.apache.roller.weblogger.util,HTMLSanitizer,sanitizer,Magic Number
+app,org.apache.roller.weblogger.util,HTMLSanitizer,sanitizer,Magic Number
+app,org.apache.roller.weblogger.util,HTMLSanitizer,tokenize,Magic Number
+app,org.apache.roller.weblogger.util,HTMLSanitizer,tokenize,Magic Number
+app,org.apache.roller.weblogger.util,HTMLSanitizer,replaceAllNoRegex,Long Statement
+app,org.apache.roller.weblogger.util,I18nUtils,toLocale,Complex Method
+app,org.apache.roller.weblogger.util,I18nUtils,toLocale,Magic Number
+app,org.apache.roller.weblogger.util,I18nUtils,toLocale,Magic Number
+app,org.apache.roller.weblogger.util,I18nUtils,toLocale,Magic Number
+app,org.apache.roller.weblogger.util,I18nUtils,toLocale,Magic Number
+app,org.apache.roller.weblogger.util,I18nUtils,toLocale,Magic Number
+app,org.apache.roller.weblogger.util,IPBanList,addBannedIp,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackExtractor,extractByParsingHtml,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackExtractor,extractByParsingHtml,Magic Number
+app,org.apache.roller.weblogger.util,LinkbackExtractor,extractByParsingHtml,Magic Number
+app,org.apache.roller.weblogger.util,LinkbackExtractor,handleStartTag,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackExtractor,handleStartTag,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackExtractor,handleSimpleTag,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackExtractor,handleSimpleTag,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackExtractor,handleSimpleTag,Complex Method
+app,org.apache.roller.weblogger.util,LinkbackExtractor,handleEndTag,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackCallback,handleStartTag,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackCallback,handleStartTag,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackCallback,handleSimpleTag,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackCallback,handleSimpleTag,Complex Conditional
+app,org.apache.roller.weblogger.util,LinkbackCallback,handleSimpleTag,Complex Method
+app,org.apache.roller.weblogger.util,LinkbackCallback,handleEndTag,Complex Conditional
+app,org.apache.roller.weblogger.util,LRUCache2,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util,LRULinkedHashMap,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util,LRULinkedHashMap,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util,LRULinkedHashMap,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util,MailUtil,sendPendingEntryNotice,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendPendingEntryNotice,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendPendingEntryNotice,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendWeblogInvitation,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendWeblogInvitation,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendWeblogInvitation,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendWeblogInvitation,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendUserActivationEmail,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendUserActivationEmail,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendEmailNotification,Complex Method
+app,org.apache.roller.weblogger.util,MailUtil,sendEmailNotification,Long Method
+app,org.apache.roller.weblogger.util,MailUtil,sendEmailNotification,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendEmailNotification,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendEmailNotification,Long Statement
+app,org.apache.roller.weblogger.util,MailUtil,sendMessage,Complex Method
+app,org.apache.roller.weblogger.util,MailUtil,sendMessage,Long Parameter List
+app,org.apache.roller.weblogger.util,MailUtil,sendTextMessage,Long Parameter List
+app,org.apache.roller.weblogger.util,MailUtil,sendHTMLMessage,Long Parameter List
+app,org.apache.roller.weblogger.util,MediacastUtil,lookupResource,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,main,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,main,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,main,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,main,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,main,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,main,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,savePasswords,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,encryptionOn,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,encryptionOn,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,encryptionOff,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,resetPassword,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,grantAdmin,Long Statement
+app,org.apache.roller.weblogger.util,PasswordUtility,grantAdmin,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,grantAdmin,Magic Number
+app,org.apache.roller.weblogger.util,PasswordUtility,grantAdmin,Magic Number
+app,org.apache.roller.weblogger.util,Trackback,send,Long Statement
+app,org.apache.roller.weblogger.util,Trackback,send,Magic Number
+app,org.apache.roller.weblogger.util,Trackback,parseTrackbackResponse,Empty catch clause
+app,org.apache.roller.weblogger.util,Trackback,parseTrackbackResponse,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,removeHTML,Complex Method
+app,org.apache.roller.weblogger.util,Utilities,copyFile,Empty catch clause
+app,org.apache.roller.weblogger.util,Utilities,copyInputToOutput,Empty catch clause
+app,org.apache.roller.weblogger.util,Utilities,copyInputToOutput,Empty catch clause
+app,org.apache.roller.weblogger.util,Utilities,encodePassword,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,encodePassword,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,encodePassword,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,encodePassword,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,removeVisibleHTMLTags,Complex Conditional
+app,org.apache.roller.weblogger.util,Utilities,removeVisibleHTMLTags,Complex Method
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,toBase64,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,stripInvalidTagCharacters,Complex Conditional
+app,org.apache.roller.weblogger.util,Utilities,stripInvalidTagCharacters,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,stripInvalidTagCharacters,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,stripInvalidTagCharacters,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,stripInvalidTagCharacters,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,transformToHTMLSubset,Long Identifier
+app,org.apache.roller.weblogger.util,Utilities,transformToHTMLSubset,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,transformToHTMLSubset,Magic Number
+app,org.apache.roller.weblogger.util,Utilities,getContentTypeFromFileName,Empty catch clause
+app,org.apache.roller.weblogger.util,Utilities,hasNameAndDomain,Magic Number
+app,org.apache.roller.weblogger.util,IPBanListTest,isBanned,Empty catch clause
+app,org.apache.roller.weblogger.util,IPBanListTest,isBanned,Magic Number
+app,org.apache.roller.weblogger.util,IPBanListTest,isBanned4,Empty catch clause
+app,org.apache.roller.weblogger.util,IPBanListTest,isBanned4,Magic Number
+app,org.apache.roller.weblogger.util,LinkbackExtractorTest,testLinkbackExtractor,Long Statement
+app,org.apache.roller.weblogger.util,LRUCache2Test,testTimeout,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2Test,testTimeout,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2Test,testTimeout,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2Test,testTimeout,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2Test,testLRU,Empty catch clause
+app,org.apache.roller.weblogger.util,LRUCache2Test,testLRU,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2Test,testLRU,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2Test,testLRU,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2Test,testLRU,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2Test,testPurge,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2Test,testPurge,Magic Number
+app,org.apache.roller.weblogger.util,LRUCache2Test,testPurge,Magic Number
+app,org.apache.roller.weblogger.util,UtilitiesTest,testTruncateNicely1,Magic Number
+app,org.apache.roller.weblogger.util,UtilitiesTest,testTruncateNicely1,Magic Number
+app,org.apache.roller.weblogger.util,UtilitiesTest,testTruncateNicely2,Magic Number
+app,org.apache.roller.weblogger.util,UtilitiesTest,testTruncateNicely2,Magic Number
+app,org.apache.roller.weblogger.util.cache,ExpiringLRUCacheFactoryImpl,constructCache,Magic Number
+app,org.apache.roller.weblogger.util.cache,ExpiringLRUCacheFactoryImpl,constructCache,Magic Number
+app,org.apache.roller.weblogger.util.cache,ExpiringLRUCacheFactoryImpl,constructCache,Magic Number
+app,org.apache.roller.weblogger.util.cache,LRUCacheFactoryImpl,constructCache,Magic Number
+app,org.apache.roller.weblogger.util.cache,LRUCacheImpl,LRUCacheImpl,Magic Number
+app,org.apache.roller.weblogger.util.cache,LRUCacheImpl,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util.cache,LRUCacheImpl,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util.cache,LRUCacheImpl,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util.cache,LRULinkedHashMap,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util.cache,LRULinkedHashMap,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger.util.cache,LRULinkedHashMap,LRULinkedHashMap,Magic Number
+app,org.apache.roller.weblogger,TestUtils,setupWeblogger,Magic Number
+app,org.apache.roller.weblogger,TestUtils,clearTestData,Empty catch clause
+app,org.apache.roller.weblogger,TestUtils,setupWeblogEntry,Long Statement
+app,org.apache.roller.weblogger,TestUtils,setupWeblogEntry,Long Parameter List
+app,org.apache.roller.weblogger.webservices.atomprotocol,EntryCollection,getEntry,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,EntryCollection,getCollection,Complex Method
+app,org.apache.roller.weblogger.webservices.atomprotocol,EntryCollection,getCollection,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,EntryCollection,getCollection,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,EntryCollection,getCollection,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,EntryCollection,putEntry,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,EntryCollection,putEntry,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,EntryCollection,deleteEntry,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,EntryCollection,copyToRollerEntry,Complex Method
+app,org.apache.roller.weblogger.webservices.atomprotocol,EntryCollection,copyToRollerEntry,Long Statement
+app,org.apache.roller.weblogger.webservices.atomprotocol,MediaCollection,postMedia,Complex Method
+app,org.apache.roller.weblogger.webservices.atomprotocol,MediaCollection,getCollection,Complex Method
+app,org.apache.roller.weblogger.webservices.atomprotocol,MediaCollection,getCollection,Empty catch clause
+app,org.apache.roller.weblogger.webservices.atomprotocol,MediaCollection,getCollection,Long Method
+app,org.apache.roller.weblogger.webservices.atomprotocol,MediaCollection,getCollection,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,MediaCollection,filePathFromPathInfo,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,MediaCollection,filePathFromPathInfo,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,MediaCollection,filePathFromPathInfo,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,MediaCollection,createFileName,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,RollerAtomHandler,getEntry,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,RollerAtomHandler,deleteEntry,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,RollerAtomHandler,isEntryURI,Complex Conditional
+app,org.apache.roller.weblogger.webservices.atomprotocol,RollerAtomHandler,isEntryURI,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,RollerAtomHandler,isEntryURI,Magic Number
+app,org.apache.roller.weblogger.webservices.atomprotocol,RollerAtomHandler,authenticateWSSE,Complex Method
+app,org.apache.roller.weblogger.webservices.atomprotocol,RollerAtomHandler,authenticateWSSE,Long Statement
+app,org.apache.roller.weblogger.webservices.atomprotocol,RollerAtomHandler,oneSecondThrottle,Empty catch clause
+app,org.apache.roller.weblogger.webservices.atomprotocol,RollerAtomService,RollerAtomService,Long Statement
+app,org.apache.roller.weblogger.webservices.oauth,AuthorizationServlet,returnToConsumer,Complex Conditional
+app,org.apache.roller.weblogger.webservices.oauth,AuthorizationServlet,returnToConsumer,Long Statement
+app,org.apache.roller.weblogger.webservices.tagdata,TagDataServlet,doGet,Complex Conditional
+app,org.apache.roller.weblogger.webservices.tagdata,TagDataServlet,doGet,Complex Method
+app,org.apache.roller.weblogger.webservices.tagdata,TagDataServlet,doGet,Long Method
+app,org.apache.roller.weblogger.webservices.tagdata,TagDataServlet,doGet,Magic Number
+app,org.apache.roller.weblogger.webservices.xmlrpc,BaseAPIHandler,validate,Complex Method
+app,org.apache.roller.weblogger.webservices.xmlrpc,BloggerAPIHandler,deletePost,Long Parameter List
+app,org.apache.roller.weblogger.webservices.xmlrpc,BloggerAPIHandler,setTemplate,Long Parameter List
+app,org.apache.roller.weblogger.webservices.xmlrpc,BloggerAPIHandler,getTemplate,Long Parameter List
+app,org.apache.roller.weblogger.webservices.xmlrpc,BloggerAPIHandler,getUsersBlogs,Magic Number
+app,org.apache.roller.weblogger.webservices.xmlrpc,BloggerAPIHandler,editPost,Long Parameter List
+app,org.apache.roller.weblogger.webservices.xmlrpc,BloggerAPIHandler,newPost,Long Parameter List
+app,org.apache.roller.weblogger.webservices.xmlrpc,BloggerAPIHandler,newPost,Magic Number
+app,org.apache.roller.weblogger.webservices.xmlrpc,BloggerAPIHandler,newPost,Magic Number
+app,org.apache.roller.weblogger.webservices.xmlrpc,BloggerAPIHandler,newPost,Magic Number
+app,org.apache.roller.weblogger.webservices.xmlrpc,BloggerAPIHandler,getRecentPosts,Long Parameter List
+app,org.apache.roller.weblogger.webservices.xmlrpc,MetaWeblogAPIHandler,editPost,Long Parameter List
+app,org.apache.roller.weblogger.webservices.xmlrpc,MetaWeblogAPIHandler,editPost,Complex Method
+app,org.apache.roller.weblogger.webservices.xmlrpc,MetaWeblogAPIHandler,editPost,Long Parameter List
+app,org.apache.roller.weblogger.webservices.xmlrpc,MetaWeblogAPIHandler,newPost,Long Parameter List
+app,org.apache.roller.weblogger.webservices.xmlrpc,MetaWeblogAPIHandler,newPost,Complex Method
+app,org.apache.roller.weblogger.webservices.xmlrpc,MetaWeblogAPIHandler,newPost,Long Parameter List
+app,org.apache.roller.weblogger.webservices.xmlrpc,MetaWeblogAPIHandler,newPost,Magic Number
+app,org.apache.roller.weblogger.webservices.xmlrpc,MetaWeblogAPIHandler,newPost,Magic Number
+app,org.apache.roller.weblogger.webservices.xmlrpc,MetaWeblogAPIHandler,createCategoryStruct,Long Statement
+app,org.apache.roller.testing,DerbyStartStopper,start,Empty catch clause
+app,org.apache.roller.testing,DerbyStartStopper,start,Long Statement
+app,org.apache.roller.testing,DerbyStartStopper,start,Magic Number
+app,org.apache.roller.testing,DerbyStartStopper,stop,Empty catch clause
+app,org.apache.roller.testing,DerbyStartStopper,stop,Empty catch clause
+app,org.apache.roller.testing,DerbyStartStopper,stop,Empty catch clause
+app,org.apache.roller.testing,DerbyStartStopper,stop,Magic Number
+app,org.apache.roller.weblogger.ui,ApplicationResourcesTest,setUp,Long Statement
+app,org.apache.roller.weblogger.ui,UIPluginManagerTest,testEntryEditors,Magic Number
