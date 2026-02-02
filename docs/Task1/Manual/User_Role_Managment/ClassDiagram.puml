@@ -1,0 +1,143 @@
+@startuml user_subsystem
+
+package "org.apache.roller.weblogger.pojos" {
+    class User {
+        - String id
+        - String userName
+        - String password
+        - String emailAddress
+        - Boolean enabled
+        + String getUserName()
+        + boolean hasGlobalPermission(String)
+    }
+
+    class WeblogPermission {
+        - String userName
+        - String objectId
+        - String actions
+        + User getUser()
+        + Weblog getWeblog()
+    }
+
+    class GlobalPermission {
+        - List<String> actions
+    }
+
+    class UserRole {
+        - String userName
+        - String roleName
+    }
+
+    abstract class RollerPermission {
+        + boolean implies(Permission)
+    }
+
+    abstract class ObjectPermission {
+        - String objectId
+        - String objectType
+    }
+
+    class OAuthAccessorRecord {
+        - String consumerKey
+        - String accessorToken
+    }
+
+    class OAuthConsumerRecord {
+        - String consumerKey
+        - String consumerSecret
+    }
+
+    class RuntimeConfigProperty {
+        - String name
+        - String value
+    }
+}
+
+package "org.apache.roller.weblogger.business" {
+    interface UserManager {
+        + void addUser(User)
+        + User getUserByUserName(String)
+        + boolean checkPermission(RollerPermission, User)
+        + void grantWeblogPermission(Weblog, User, List<String>)
+    }
+
+    interface OAuthManager {
+        + void saveConsumerAndAccessor(OAuthConsumerRecord, OAuthAccessorRecord)
+    }
+
+    package "jpa" {
+        class JPAUserManagerImpl
+        class JPAOAuthManagerImpl
+    }
+
+    interface CustomUserRegistry {
+        + User getUser(String)
+    }
+    
+    class RollerSession {
+        - User authenticatedUser
+    }
+}
+
+package "org.apache.roller.weblogger.ui.core" {
+    class BootstrapFilter
+    interface PasswordEncoder
+    class SecurityConfig
+    class RollerRequest {
+        + User getAuthenticatedUser()
+    }
+    package "filters" {
+        class DeviceResolverRequestFilter
+    }
+}
+
+package "org.apache.roller.weblogger.ui.struts2" {
+    package "admin" {
+        class UserAdmin
+        class CreateUserAction
+        class EditUserAction
+    }
+    package "core" {
+        class LoginAction
+        class RegisterAction
+        class ProfileAction
+        class UserMembershipAction
+    }
+}
+
+package "org.apache.roller.weblogger.util" {
+    class UserSearchCriteria
+    class UsersPager
+    class SaltSource
+    class UserValidator
+    class UserComparator
+}
+
+' Relationships
+WeblogPermission --|> ObjectPermission
+GlobalPermission --|> RollerPermission
+ObjectPermission --|> RollerPermission
+
+User "1" *-- "0..*" WeblogPermission
+User "1" *-- "0..*" UserRole
+
+UserManager ..> User
+UserManager ..> RollerPermission
+OAuthManager ..> OAuthConsumerRecord
+OAuthManager ..> OAuthAccessorRecord
+
+JPAUserManagerImpl ..|> UserManager
+JPAOAuthManagerImpl ..|> OAuthManager
+
+LoginAction ..> UserManager
+RegisterAction ..> UserManager
+UserAdmin ..> UserManager
+
+RollerSession "1" -- "1" User
+RollerRequest ..> User
+
+UserValidator ..> User
+UserComparator ..> User
+UsersPager ..> User
+
+@enduml
