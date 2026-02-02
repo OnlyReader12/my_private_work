@@ -1,0 +1,229 @@
+@startuml weblog_subsystem
+
+package "org.apache.roller.weblogger.pojos" {
+    class Weblog {
+        - String id
+        - String handle
+        - String name
+        - String tagline
+        - Boolean allowComments
+        - String locale
+        - String timeZone
+        - Date dateCreated
+        + String getHandle()
+        + String getName()
+        + User getCreator()
+        + WeblogTheme getTheme()
+        + List<WeblogCategory> getWeblogCategories()
+    }
+
+    class WeblogEntry {
+        - String id
+        - String title
+        - String text
+        - String anchor
+        - PubStatus status
+        - Timestamp pubTime
+        + Weblog getWebsite()
+        + WeblogCategory getCategory()
+        + Set<WeblogEntryTag> getTags()
+        + List<WeblogEntryComment> getComments()
+    }
+
+    enum PubStatus {
+        DRAFT
+        PUBLISHED
+        PENDING
+        SCHEDULED
+    }
+
+    class WeblogCategory {
+        - String id
+        - String name
+        + Weblog getWeblog()
+    }
+
+    class WeblogEntryComment {
+        - String id
+        - String content
+        - ApprovalStatus status
+        + WeblogEntry getWeblogEntry()
+    }
+
+    class WeblogEntryAttribute {
+        - String name
+        - String value
+    }
+
+    class WeblogEntryTag {
+        - String name
+    }
+
+    class WeblogEntryTagAggregate {
+        - String tagName
+        - int count
+    }
+
+    class WeblogHitCount {
+        - int dailyHits
+    }
+
+    class WeblogBookmark {
+        - String name
+        - String url
+    }
+
+    class WeblogBookmarkFolder {
+        - String name
+    }
+
+    class MediaFile {
+        - String id
+        - String name
+    }
+
+    class MediaFileDirectory {
+        - String id
+        - String name
+    }
+
+    class WeblogTemplate {
+        - String id
+        - String name
+    }
+
+    interface Theme {
+        + String getName()
+    }
+
+    interface ThemeTemplate {
+        + String getName()
+    }
+
+    class CustomTemplateRendition {
+        - String templateCode
+    }
+
+    class PingTarget {
+        - String name
+        - String pingUrl
+    }
+
+    class PingQueueEntry {
+        - Timestamp entryTime
+    }
+
+    class AutoPing {
+        - String id
+    }
+}
+
+package "org.apache.roller.weblogger.business" {
+    interface WeblogManager {
+        + void saveWeblog(Weblog)
+        + Weblog getWeblogByHandle(String)
+    }
+
+    interface WeblogEntryManager {
+        + void saveWeblogEntry(WeblogEntry)
+        + List<WeblogEntry> getWeblogEntries(WeblogEntrySearchCriteria)
+    }
+
+    interface BookmarkManager {
+        + void saveBookmark(WeblogBookmark)
+    }
+
+    interface MediaFileManager {
+        + void saveMediaFile(MediaFile)
+    }
+
+    interface FileContentManager {
+        + void saveFileContent(Weblog, String, InputStream)
+    }
+
+    interface URLStrategy {
+        + String getWeblogURL(Weblog, String, boolean)
+    }
+
+    package "pings" {
+        interface PingTargetManager {
+            + void savePingTarget(PingTarget)
+        }
+        interface PingQueueManager {
+            + void addQueueEntry(PingQueueEntry)
+        }
+        interface AutoPingManager {
+            + void saveAutoPing(AutoPing)
+        }
+    }
+
+    package "themes" {
+        interface ThemeManager {
+            + Theme getTheme(String)
+            + WeblogTheme getTheme(Weblog)
+        }
+    }
+}
+
+package "org.apache.roller.weblogger.ui.rendering" {
+    class RendererManager {
+        + {static} Renderer getRenderer(Template, DeviceType)
+    }
+    
+    interface RendererFactory {
+        + Renderer getRenderer(Template, DeviceType)
+    }
+
+    class WeblogRequestMapper {
+        + boolean handleRequest(HttpServletRequest, HttpServletResponse)
+    }
+
+    package "model" {
+        class PageModel
+        class FeedModel
+        class SearchResultsModel
+    }
+
+    package "pagers" {
+        class WeblogEntriesPager
+    }
+}
+
+' Relationships
+Weblog "1" *-- "0..*" WeblogEntry
+Weblog "1" *-- "0..*" WeblogCategory
+Weblog "1" *-- "0..*" WeblogBookmarkFolder
+Weblog "1" *-- "0..*" MediaFileDirectory
+Weblog "1" *-- "0..*" WeblogTemplate
+Weblog "1" *-- "0..*" AutoPing
+Weblog "1" -- "1" WeblogHitCount
+
+WeblogEntry "1" -- "1" WeblogCategory
+WeblogEntry "1" *-- "0..*" WeblogEntryComment
+WeblogEntry "1" *-- "0..*" WeblogEntryAttribute
+WeblogEntry "1" *-- "0..*" WeblogEntryTag
+WeblogEntry "n" -- "1" PubStatus
+
+WeblogBookmarkFolder "1" *-- "0..*" WeblogBookmark
+MediaFileDirectory "1" *-- "0..*" MediaFile
+WeblogTemplate "1" *-- "0..*" CustomTemplateRendition
+
+AutoPing "n" -- "1" PingTarget
+PingQueueEntry "n" -- "1" PingTarget
+
+WeblogManager ..> Weblog
+WeblogEntryManager ..> WeblogEntry
+BookmarkManager ..> WeblogBookmark
+MediaFileManager ..> MediaFile
+FileContentManager ..> Weblog
+PingTargetManager ..> PingTarget
+PingQueueManager ..> PingQueueEntry
+AutoPingManager ..> AutoPing
+ThemeManager ..> Theme
+
+WeblogRequestMapper ..> Weblog
+RendererManager ..> RendererFactory
+PageModel --|> org.apache.roller.weblogger.ui.rendering.model.Model
+WeblogEntriesPager ..> WeblogEntry
+
+@enduml
