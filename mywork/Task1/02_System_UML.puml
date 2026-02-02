@@ -1,0 +1,565 @@
+@startuml Apache_Roller_Subsystem_Architecture
+
+' ============================================================================
+' APACHE ROLLER - SUBSYSTEM CLASS DIAGRAM
+' Covers: Weblog/Content, User/Role, Search/Indexing Subsystems
+' ============================================================================
+
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam groupInheritance 2
+
+' Color scheme for subsystems
+skinparam package {
+    BackgroundColor<<Weblog>> #E8F5E9
+    BackgroundColor<<User>> #E3F2FD
+    BackgroundColor<<Search>> #FFF3E0
+    BackgroundColor<<Infrastructure>> #F3E5F5
+}
+
+skinparam class {
+    BackgroundColor<<Interface>> #FFFDE7
+    BackgroundColor<<Abstract>> #ECEFF1
+    BackgroundColor<<POJO>> #E1F5FE
+    BackgroundColor<<Impl>> #C8E6C9
+}
+
+' ============================================================================
+' INFRASTRUCTURE PACKAGE
+' ============================================================================
+package "org.apache.roller.weblogger.business" <<Infrastructure>> {
+    
+    interface Weblogger <<Interface>> {
+        +getUserManager(): UserManager
+        +getWeblogManager(): WeblogManager
+        +getWeblogEntryManager(): WeblogEntryManager
+        +getIndexManager(): IndexManager
+        +getUrlStrategy(): URLStrategy
+        +getThreadManager(): ThreadManager
+        +flush(): void
+        +release(): void
+    }
+    
+    class WebloggerFactory {
+        {static} +getWeblogger(): Weblogger
+        {static} +bootstrap(): void
+    }
+    
+    class JPAPersistenceStrategy {
+        -entityManagerFactory: EntityManagerFactory
+        +store(obj: Object): Object
+        +load(clazz: Class, id: String): Object
+        +remove(obj: Object): void
+        +getNamedQuery(name: String, clazz: Class): TypedQuery
+        +flush(): void
+        +release(): void
+    }
+}
+
+' ============================================================================
+' WEBLOG/CONTENT SUBSYSTEM
+' ============================================================================
+package "org.apache.roller.weblogger.business [Weblog/Content]" <<Weblog>> {
+    
+    interface WeblogEntryManager <<Interface>> {
+        +saveWeblogEntry(entry: WeblogEntry): void
+        +getWeblogEntry(id: String): WeblogEntry
+        +getWeblogEntries(wesc: WeblogEntrySearchCriteria): List<WeblogEntry>
+        +getWeblogEntryByAnchor(weblog: Weblog, anchor: String): WeblogEntry
+        +removeWeblogEntry(entry: WeblogEntry): void
+        +getComments(entry: WeblogEntry, csc: CommentSearchCriteria): List<WeblogEntryComment>
+        +saveComment(comment: WeblogEntryComment): void
+        +removeComment(comment: WeblogEntryComment): void
+        +getWeblogCategories(weblog: Weblog): List<WeblogCategory>
+    }
+    
+    interface WeblogManager <<Interface>> {
+        +saveWeblog(weblog: Weblog): void
+        +getWeblogByHandle(handle: String, enabled: Boolean): Weblog
+        +removeWeblog(weblog: Weblog): void
+        +getWeblogs(enabled: Boolean, active: Boolean, startDate: Date, endDate: Date, offset: int, length: int): List<Weblog>
+    }
+    
+    class JPAWeblogEntryManagerImpl <<Impl>> {
+        -strategy: JPAPersistenceStrategy
+        -roller: Weblogger
+        -entryAnchorToIdMap: Map<String, String>
+        +saveWeblogEntry(entry: WeblogEntry): void
+        +getWeblogEntry(id: String): WeblogEntry
+        +getWeblogEntries(wesc: WeblogEntrySearchCriteria): List<WeblogEntry>
+        -updateTagCount(name: String, weblog: Weblog, amount: int): void
+        -createAnchor(entry: WeblogEntry): String
+    }
+    
+    class JPAWeblogManagerImpl <<Impl>> {
+        -strategy: JPAPersistenceStrategy
+        -roller: Weblogger
+        -weblogHandleToIdMap: Map<String, String>
+        +saveWeblog(weblog: Weblog): void
+        +getWeblogByHandle(handle: String, enabled: Boolean): Weblog
+        +removeWeblog(weblog: Weblog): void
+    }
+}
+
+package "org.apache.roller.weblogger.pojos [Content POJOs]" <<Weblog>> {
+    
+    class Weblog <<POJO>> {
+        -id: String
+        -handle: String
+        -name: String
+        -tagline: String
+        -creator: String
+        -enabled: Boolean
+        -visible: Boolean
+        -lastModified: Date
+        -categories: List<WeblogCategory>
+        +getCreator(): User
+        +getTheme(): Theme
+        +hasUserPermission(user: User, action: String): boolean
+        +getRecentWeblogEntries(length: int): List<WeblogEntry>
+        +getAbsoluteURL(): String
+    }
+    
+    class WeblogEntry <<POJO>> {
+        -id: String
+        -anchor: String
+        -title: String
+        -text: String
+        -summary: String
+        -status: PubStatus
+        -pubTime: Timestamp
+        -updateTime: Timestamp
+        -website: Weblog
+        -category: WeblogCategory
+        -creatorUserName: String
+        -tags: Set<WeblogEntryTag>
+        -attributes: Set<WeblogEntryAttribute>
+        +getCreator(): User
+        +getComments(): List<WeblogEntryComment>
+        +getPermalink(): String
+        +isPublished(): boolean
+    }
+    
+    class WeblogEntryComment <<POJO>> {
+        -id: String
+        -name: String
+        -email: String
+        -url: String
+        -content: String
+        -postTime: Timestamp
+        -status: ApprovalStatus
+        -weblogEntry: WeblogEntry
+        +getWeblogEntry(): WeblogEntry
+        +isApproved(): boolean
+    }
+    
+    class WeblogCategory <<POJO>> {
+        -id: String
+        -name: String
+        -description: String
+        -weblog: Weblog
+        +retrieveWeblogEntries(publishedOnly: boolean, subcats: boolean): List<WeblogEntry>
+        +isInUse(): boolean
+    }
+    
+    class WeblogEntryTag <<POJO>> {
+        -id: String
+        -name: String
+        -weblogEntry: WeblogEntry
+        -creatorUserName: String
+        +getCreator(): User
+    }
+    
+    class WeblogEntryTagAggregate <<POJO>> {
+        -id: String
+        -name: String
+        -weblog: Weblog
+        -total: int
+    }
+    
+    class WeblogEntryAttribute <<POJO>> {
+        -id: String
+        -name: String
+        -value: String
+        -entry: WeblogEntry
+    }
+    
+    class WeblogEntrySearchCriteria <<POJO>> {
+        -weblog: Weblog
+        -user: User
+        -startDate: Date
+        -endDate: Date
+        -catName: String
+        -tags: List<String>
+        -status: PubStatus
+        -text: String
+        -sortBy: SortBy
+        -locale: String
+        -offset: int
+        -maxResults: int
+    }
+    
+    enum PubStatus {
+        DRAFT
+        PENDING
+        SCHEDULED
+        PUBLISHED
+    }
+}
+
+' ============================================================================
+' USER/ROLE SUBSYSTEM
+' ============================================================================
+package "org.apache.roller.weblogger.business [User/Role]" <<User>> {
+    
+    interface UserManager <<Interface>> {
+        +getUserByUserName(userName: String): User
+        +addUser(newUser: User): void
+        +saveUser(user: User): void
+        +removeUser(user: User): void
+        +checkPermission(perm: RollerPermission, user: User): boolean
+        +getWeblogPermission(weblog: Weblog, user: User): WeblogPermission
+        +grantWeblogPermission(weblog: Weblog, user: User, actions: List<String>): void
+        +getRoles(user: User): List<String>
+        +grantRole(roleName: String, user: User): void
+        +revokeRole(roleName: String, user: User): void
+    }
+    
+    class JPAUserManagerImpl <<Impl>> {
+        -strategy: JPAPersistenceStrategy
+        -roller: Weblogger
+        -userNameToIdMap: Map<String, String>
+        +getUserByUserName(userName: String): User
+        +checkPermission(perm: RollerPermission, user: User): boolean
+        +getWeblogPermission(weblog: Weblog, user: User): WeblogPermission
+        +getRoles(user: User): List<String>
+    }
+}
+
+package "org.apache.roller.weblogger.pojos [User POJOs]" <<User>> {
+    
+    class User <<POJO>> {
+        -id: String
+        -userName: String
+        -password: String
+        -screenName: String
+        -fullName: String
+        -emailAddress: String
+        -dateCreated: Date
+        -locale: String
+        -timeZone: String
+        -enabled: Boolean
+        +hasGlobalPermission(action: String): boolean
+        +hasGlobalPermissions(actions: List<String>): boolean
+        +resetPassword(newPassword: String, algorithm: String): void
+    }
+    
+    class UserRole <<POJO>> {
+        -id: String
+        -userName: String
+        -role: String
+        +getUserName(): String
+        +getRole(): String
+    }
+    
+    abstract class RollerPermission <<Abstract>> {
+        #actions: Set<String>
+        +{abstract} implies(perm: RollerPermission): boolean
+        +getActionsAsList(): List<String>
+        +hasAction(action: String): boolean
+    }
+    
+    abstract class ObjectPermission <<Abstract>> {
+        #objectId: String
+        #objectType: String
+        #userName: String
+        +getObjectId(): String
+        +getObjectType(): String
+    }
+    
+    class WeblogPermission <<POJO>> {
+        +{static} EDIT_DRAFT: String = "edit_draft"
+        +{static} POST: String = "post"
+        +{static} ADMIN: String = "admin"
+        +implies(perm: RollerPermission): boolean
+        +getWeblog(): Weblog
+        +getUser(): User
+    }
+    
+    class GlobalPermission <<POJO>> {
+        +{static} ADMIN: String = "admin"
+        +{static} LOGIN: String = "login"
+        +GlobalPermission(user: User)
+        +GlobalPermission(actions: List<String>)
+        +implies(perm: RollerPermission): boolean
+    }
+}
+
+' ============================================================================
+' SEARCH/INDEXING SUBSYSTEM
+' ============================================================================
+package "org.apache.roller.weblogger.business.search" <<Search>> {
+    
+    interface IndexManager <<Interface>> {
+        +initialize(): void
+        +shutdown(): void
+        +search(term: String, weblogHandle: String, category: String, locale: String, pageNum: int, entryCount: int, urlStrategy: URLStrategy): SearchResultList
+        +addEntryIndexOperation(entry: WeblogEntry): void
+        +addEntryReIndexOperation(entry: WeblogEntry): void
+        +removeEntryIndexOperation(entry: WeblogEntry): void
+        +rebuildWebsiteIndex(weblog: Weblog): void
+        +removeWebsiteIndex(weblog: Weblog): void
+    }
+    
+    class SearchResultList {
+        -results: List<WeblogEntryWrapper>
+        -offset: int
+        -limit: int
+        -totalHits: int
+        +getResults(): List<WeblogEntryWrapper>
+    }
+}
+
+package "org.apache.roller.weblogger.business.search.lucene" <<Search>> {
+    
+    class LuceneIndexManager <<Impl>> {
+        -indexDir: String
+        -roller: Weblogger
+        -sharedReader: DirectoryReader
+        -readWriteLock: ReadWriteLock
+        +search(...): SearchResultList
+        +addEntryReIndexOperation(entry: WeblogEntry): void
+        +removeEntryIndexOperation(entry: WeblogEntry): void
+        +scheduleIndexOperation(op: IndexOperation): void
+        +executeIndexOperationNow(op: IndexOperation): void
+        +getSharedIndexReader(): DirectoryReader
+        +resetSharedReader(): void
+        +getReadWriteLock(): ReadWriteLock
+        +getIndexDirectory(): Directory
+        #{static} getAnalyzer(): Analyzer
+    }
+    
+    abstract class IndexOperation <<Abstract>> {
+        #manager: LuceneIndexManager
+        #roller: Weblogger
+        +run(): void
+        +{abstract} doRun(): void
+        #getDocument(entry: WeblogEntry): Document
+        #beginWriting(): void
+        #endWriting(): void
+    }
+    
+    abstract class WriteToIndexOperation <<Abstract>> {
+        +run(): void
+    }
+    
+    abstract class ReadFromIndexOperation <<Abstract>> {
+        +run(): void
+    }
+    
+    class AddEntryOperation {
+        -entryId: String
+        +doRun(): void
+    }
+    
+    class ReIndexEntryOperation {
+        -entryId: String
+        +doRun(): void
+    }
+    
+    class RemoveEntryOperation {
+        -entryId: String
+        +doRun(): void
+    }
+    
+    class RebuildWebsiteIndexOperation {
+        -weblog: Weblog
+        +doRun(): void
+    }
+    
+    class RemoveWebsiteIndexOperation {
+        -weblogHandle: String
+        +doRun(): void
+    }
+    
+    class SearchOperation {
+        -term: String
+        -weblogHandle: String
+        -category: String
+        -locale: String
+        -searcher: IndexSearcher
+        -searchResults: TopFieldDocs
+        +doRun(): void
+        +setTerm(term: String): void
+        +setWeblogHandle(handle: String): void
+        +getResults(): TopFieldDocs
+        +getSearcher(): IndexSearcher
+    }
+    
+    class FieldConstants {
+        +{static} ID: String
+        +{static} TITLE: String
+        +{static} CONTENT: String
+        +{static} CATEGORY: String
+        +{static} WEBSITE_HANDLE: String
+        +{static} PUBLISHED: String
+        +{static} C_CONTENT: String
+        +{static} LOCALE: String
+        +{static} CREATOR: String
+    }
+}
+
+' ============================================================================
+' RELATIONSHIPS - INHERITANCE
+' ============================================================================
+
+' Weblog Manager Inheritance
+JPAWeblogEntryManagerImpl ..|> WeblogEntryManager : <<realizes>>
+JPAWeblogManagerImpl ..|> WeblogManager : <<realizes>>
+
+' User Manager Inheritance
+JPAUserManagerImpl ..|> UserManager : <<realizes>>
+
+' Search Manager Inheritance
+LuceneIndexManager ..|> IndexManager : <<realizes>>
+
+' Permission Inheritance
+ObjectPermission --|> RollerPermission : extends
+WeblogPermission --|> ObjectPermission : extends
+GlobalPermission --|> RollerPermission : extends
+
+' Index Operation Inheritance
+WriteToIndexOperation --|> IndexOperation : extends
+ReadFromIndexOperation --|> IndexOperation : extends
+AddEntryOperation --|> WriteToIndexOperation : extends
+ReIndexEntryOperation --|> WriteToIndexOperation : extends
+RemoveEntryOperation --|> WriteToIndexOperation : extends
+RebuildWebsiteIndexOperation --|> WriteToIndexOperation : extends
+RemoveWebsiteIndexOperation --|> WriteToIndexOperation : extends
+SearchOperation --|> ReadFromIndexOperation : extends
+
+' ============================================================================
+' RELATIONSHIPS - COMPOSITION & AGGREGATION
+' ============================================================================
+
+' Weblog compositions
+Weblog *-- "0..*" WeblogCategory : contains
+Weblog *-- "0..*" WeblogEntryTagAggregate : aggregates
+
+' WeblogEntry compositions
+WeblogEntry *-- "0..*" WeblogEntryTag : contains
+WeblogEntry *-- "0..*" WeblogEntryAttribute : contains
+WeblogEntry *-- "0..*" WeblogEntryComment : contains
+
+' ============================================================================
+' RELATIONSHIPS - ASSOCIATIONS
+' ============================================================================
+
+' Content POJO associations
+WeblogEntry --> Weblog : website
+WeblogEntry --> WeblogCategory : category
+WeblogEntry --> PubStatus : status
+WeblogEntryComment --> WeblogEntry : weblogEntry
+WeblogCategory --> Weblog : weblog
+WeblogEntryTag --> WeblogEntry : weblogEntry
+WeblogEntryTagAggregate --> Weblog : weblog
+
+' Search criteria
+WeblogEntrySearchCriteria --> Weblog : weblog
+WeblogEntrySearchCriteria --> User : user
+WeblogEntrySearchCriteria --> PubStatus : status
+
+' User POJO associations
+UserRole --> User : "userName"
+WeblogPermission --> Weblog : "objectId (handle)"
+WeblogPermission --> User : "userName"
+
+' ============================================================================
+' CROSS-SUBSYSTEM DEPENDENCIES
+' ============================================================================
+
+' Weblog POJOs -> User Subsystem
+Weblog ..> UserManager : "getCreator() calls\ngetUserByUserName()"
+Weblog ..> User : "returns creator"
+WeblogEntry ..> UserManager : "getCreator() calls\ngetUserByUserName()"
+WeblogEntry ..> User : "returns creator"
+WeblogEntryTag ..> UserManager : "getCreator() calls"
+
+' Weblog POJOs -> Weblog Manager (self-reference via factory)
+Weblog ..> WeblogEntryManager : "getRecentWeblogEntries()\ncalls getWeblogEntries()"
+WeblogCategory ..> WeblogEntryManager : "retrieveWeblogEntries()\ncalls getWeblogEntries()"
+
+' User Permission -> Weblog
+WeblogPermission ..> WeblogManager : "getWeblog() calls\ngetWeblogByHandle()"
+
+' Manager implementations -> Persistence
+JPAWeblogEntryManagerImpl --> JPAPersistenceStrategy : uses
+JPAWeblogManagerImpl --> JPAPersistenceStrategy : uses
+JPAUserManagerImpl --> JPAPersistenceStrategy : uses
+
+' Manager implementations -> Weblogger facade
+JPAWeblogEntryManagerImpl --> Weblogger : roller
+JPAWeblogManagerImpl --> Weblogger : roller
+JPAUserManagerImpl --> Weblogger : roller
+LuceneIndexManager --> Weblogger : roller
+
+' Cross-manager calls
+JPAWeblogEntryManagerImpl ..> WeblogManager : "saveWeblog() after\nentry save"
+JPAWeblogEntryManagerImpl ..> "AutoPingManager" : "queueApplicableAutoPings()"
+
+' Search -> Weblog Subsystem
+IndexOperation --> WeblogEntry : "getDocument() uses"
+IndexOperation ..> WeblogEntryManager : "getWeblogEntry() to\nrefresh data"
+AddEntryOperation ..> WeblogEntryManager : getWeblogEntry
+ReIndexEntryOperation ..> WeblogEntryManager : getWeblogEntry
+RebuildWebsiteIndexOperation ..> WeblogEntryManager : getWeblogEntries
+LuceneIndexManager ..> WeblogEntryManager : "convertHitsToEntryList()"
+
+' Search -> User (indirect)
+IndexOperation ..> User : "entry.getCreator()\nfor indexing"
+
+' Search operation management
+LuceneIndexManager --> IndexOperation : "schedules/executes"
+LuceneIndexManager *-- SearchOperation : "creates for search"
+
+' Factory relationships
+WebloggerFactory --> Weblogger : creates
+Weblogger --> WeblogEntryManager : provides
+Weblogger --> WeblogManager : provides
+Weblogger --> UserManager : provides
+Weblogger --> IndexManager : provides
+
+' ============================================================================
+' NOTES
+' ============================================================================
+
+note right of WeblogEntry
+  <b>Cross-Subsystem Hub</b>
+  - Links to User via creatorUserName
+  - Indexed by Search subsystem
+  - Main content entity
+end note
+
+note right of JPAUserManagerImpl
+  <b>Authorization Center</b>
+  - checkPermission() is called
+    before every protected action
+  - Caches user lookups
+end note
+
+note right of LuceneIndexManager
+  <b>Async Processing</b>
+  - Write operations run in background
+  - Uses ReadWriteLock for concurrency
+  - Shared IndexReader for searches
+end note
+
+note bottom of JPAPersistenceStrategy
+  <b>Central Persistence</b>
+  All JPA implementations delegate
+  to this class for EntityManager
+  operations (store, load, query)
+end note
+
+@enduml
