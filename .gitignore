@@ -4,6 +4,7 @@
 .classpath
 .project
 .settings/
+.vscode/
 
 # Intellij
 .idea/
