@@ -16,9 +16,8 @@
  * directory of this distribution.
  */
 
-package org.apache.roller.weblogger.pojos; 
+package org.apache.roller.weblogger.pojos;
 
-import java.io.Serializable;
 import java.security.Permission;
 import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -26,16 +25,17 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.roller.weblogger.WebloggerException;
 import org.apache.roller.weblogger.business.WebloggerFactory;
 
-
 /**
  * Permission for one specific weblog
+ * 
  * @author Dave Johnson
  */
-public class WeblogPermission extends ObjectPermission implements Serializable {
+public class WeblogPermission extends ObjectPermission {
     public static final String EDIT_DRAFT = "edit_draft";
     public static final String POST = "post";
     public static final String ADMIN = "admin";
     public static final List<String> ALL_ACTIONS = List.of(EDIT_DRAFT, POST, ADMIN);
+    private static final String OBJECT_TYPE_WEBLOG = "Weblog";
 
     public WeblogPermission() {
         // required by JPA
@@ -44,26 +44,26 @@ public class WeblogPermission extends ObjectPermission implements Serializable {
     public WeblogPermission(Weblog weblog, User user, String actions) {
         super("WeblogPermission user: " + user.getUserName());
         setActions(actions);
-        objectType = "Weblog";
+        objectType = OBJECT_TYPE_WEBLOG;
         objectId = weblog.getHandle();
         userName = user.getUserName();
     }
-    
+
     public WeblogPermission(Weblog weblog, User user, List<String> actions) {
         super("WeblogPermission user: " + user.getUserName());
-        setActionsAsList(actions); 
-        objectType = "Weblog";
+        setActionsAsList(actions);
+        objectType = OBJECT_TYPE_WEBLOG;
         objectId = weblog.getHandle();
         userName = user.getUserName();
     }
-    
+
     public WeblogPermission(Weblog weblog, List<String> actions) {
         super("WeblogPermission user: N/A");
-        setActionsAsList(actions); 
-        objectType = "Weblog";
+        setActionsAsList(actions);
+        objectType = OBJECT_TYPE_WEBLOG;
         objectId = weblog.getHandle();
     }
-    
+
     public Weblog getWeblog() throws WebloggerException {
         if (objectId != null) {
             return WebloggerFactory.getWeblogger().getWeblogManager().getWeblogByHandle(objectId, null);
@@ -80,43 +80,27 @@ public class WeblogPermission extends ObjectPermission implements Serializable {
 
     @Override
     public boolean implies(Permission perm) {
-        if (perm instanceof WeblogPermission) {
-            WeblogPermission rperm = (WeblogPermission)perm;
-            
-            if (hasAction(ADMIN)) {
-                // admin implies all other permissions
-                return true;
-            } else if (hasAction(POST)) {
-                // Best we've got is POST, so make sure perm doesn't specify ADMIN
-                for (String action : rperm.getActionsAsList()) {
-                    if (action.equals(ADMIN)) {
-                        return false;
-                    }
-                }
-            } else if (hasAction(EDIT_DRAFT)) {
-                // Best we've got is EDIT_DRAFT, so make sure perm doesn't specify anything else
-                for (String action : rperm.getActionsAsList()) {
-                    if (action.equals(POST)) {
-                        return false;
-                    }
-                    if (action.equals(ADMIN)) {
-                        return false;
-                    }
-                }
-            }
+        if (!(perm instanceof WeblogPermission)) {
+            return false;
+        }
+        WeblogPermission rperm = (WeblogPermission) perm;
+
+        if (hasAction(ADMIN)) {
+            // admin implies all other permissions
             return true;
         }
-        return false;
-    }
-    
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("GlobalPermission: ");
-        for (String action : getActionsAsList()) { 
-            sb.append(" ").append(action).append(" ");
+
+        if (hasAction(POST)) {
+            // Post implies everything except admin
+            return !rperm.hasAction(ADMIN);
         }
-        return sb.toString();
+
+        if (hasAction(EDIT_DRAFT)) {
+            // Edit draft implies only edit draft (not post or admin)
+            return !rperm.hasAction(POST) && !rperm.hasAction(ADMIN);
+        }
+
+        return false;
     }
 
     @Override
@@ -127,7 +111,7 @@ public class WeblogPermission extends ObjectPermission implements Serializable {
         if (!(other instanceof WeblogPermission)) {
             return false;
         }
-        WeblogPermission o = (WeblogPermission)other;
+        WeblogPermission o = (WeblogPermission) other;
         return new EqualsBuilder()
                 .append(getUserName(), o.getUserName())
                 .append(getObjectId(), o.getObjectId())

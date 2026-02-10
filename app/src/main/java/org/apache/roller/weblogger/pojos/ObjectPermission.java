@@ -21,43 +21,31 @@ package org.apache.roller.weblogger.pojos;
 import java.util.Date;
 import org.apache.roller.util.UUIDGenerator;
 
-
 /**
- * Base permission class for Roller. 
+ * Base permission class for Roller.
  */
 public abstract class ObjectPermission extends RollerPermission {
-    protected String  id = UUIDGenerator.generateUUID();
-    protected String  userName;
-    protected String  objectType;
-    protected String  objectId;
+    protected String id = UUIDGenerator.generateUUID();
+    protected String userName;
+    protected String objectType;
+    protected String objectId;
     protected boolean pending = false;
-    protected Date    dateCreated = new Date();
-    protected String  actions;
-    
-    
-    public ObjectPermission() {
+    protected Date dateCreated = new Date();
+
+    protected ObjectPermission() {
         super("");
     }
-    
-    public ObjectPermission(String name) {
+
+    protected ObjectPermission(String name) {
         super(name);
     }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    @Override
-    public void setActions(String actions) {
-        this.actions = actions;
-    }
-
-    @Override
-    public String getActions() {
-        return actions;
     }
 
     public String getUserName() {
@@ -67,14 +55,6 @@ public abstract class ObjectPermission extends RollerPermission {
     public void setUserName(String username) {
         this.userName = username;
     }
-
-    /*public String getObjectType() {
-        return objectType;
-    }
-
-    public void setObjectType(String objectType) {
-        this.objectType = objectType;
-    }*/
 
     public String getObjectId() {
         return objectId;

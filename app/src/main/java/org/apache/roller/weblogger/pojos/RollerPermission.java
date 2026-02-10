@@ -23,27 +23,31 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.roller.weblogger.util.Utilities;
 
-
 /**
- * Base permission class for Roller. 
+ * Base permission class for Roller.
  */
 public abstract class RollerPermission extends java.security.Permission {
     private static Log log = LogFactory.getLog(RollerPermission.class);
-    
 
-    public RollerPermission(String name) {
+    protected String actions;
+
+    protected RollerPermission(String name) {
         super(name);
     }
-            
-    public abstract void setActions(String actions); 
+
+    public void setActions(String actions) {
+        this.actions = actions;
+    }
 
     @Override
-    public abstract String getActions();
+    public String getActions() {
+        return actions;
+    }
 
     public List<String> getActionsAsList() {
         return Utilities.stringToStringList(getActions(), ",");
     }
-    
+
     public void setActionsAsList(List<String> actionsList) {
         setActions(Utilities.stringListToString(actionsList, ","));
     }
@@ -52,7 +56,7 @@ public abstract class RollerPermission extends java.security.Permission {
         List<String> actionList = getActionsAsList();
         return actionList.contains(action);
     }
-    
+
     public boolean hasActions(List<String> actionsToCheck) {
         List<String> actionList = getActionsAsList();
         for (String actionToCheck : actionsToCheck) {
@@ -62,7 +66,7 @@ public abstract class RollerPermission extends java.security.Permission {
         }
         return true;
     }
-    
+
     /**
      * Merge actions into this permission.
      */
@@ -76,7 +80,7 @@ public abstract class RollerPermission extends java.security.Permission {
         }
         setActionsAsList(updatedActions);
     }
-    
+
     /**
      * Merge actions into this permission.
      */
@@ -89,7 +93,7 @@ public abstract class RollerPermission extends java.security.Permission {
         }
         setActionsAsList(updatedActions);
     }
-    
+
     /**
      * Merge actions into this permission.
      */
@@ -101,11 +105,21 @@ public abstract class RollerPermission extends java.security.Permission {
         log.debug("updatedActions2: " + updatedActions);
         setActionsAsList(updatedActions);
     }
-    
+
     /**
      * True if permission specifies no actions
      */
     public boolean isEmpty() {
         return getActions() == null || getActions().isBlank();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName()).append(": ");
+        for (String action : getActionsAsList()) {
+            sb.append(" ").append(action).append(" ");
+        }
+        return sb.toString();
     }
 }
