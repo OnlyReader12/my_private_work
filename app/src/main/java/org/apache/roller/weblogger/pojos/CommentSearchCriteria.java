@@ -17,37 +17,19 @@
  */
 package org.apache.roller.weblogger.pojos;
 
-import java.util.Date;
 import org.apache.roller.weblogger.pojos.WeblogEntryComment.ApprovalStatus;
 
-public class CommentSearchCriteria {
+public class CommentSearchCriteria extends DateRangeSearchCriteria {
 
-    // Weblog or null to get comments on all blogs
-    private Weblog weblog;
     // Entry or null to include all comments
     private WeblogEntry entry;
+
     // Text appearing in comment, or null for all
     private String searchText;
-    // Start date or null for no restriction
-    private Date startDate;
-    // End date or null for no restriction
-    private Date endDate;
     // Comment status as defined in WeblogEntryComment, or null for any
     private ApprovalStatus status;
     // True for results in reverse chrono order
     private boolean reverseChrono = false;
-    // Offset into results for paging
-    private int offset = 0;
-    // Max comments to return (or -1 for no limit)
-    private int maxResults = -1;
-
-    public Weblog getWeblog() {
-        return weblog;
-    }
-
-    public void setWeblog(Weblog weblog) {
-        this.weblog = weblog;
-    }
 
     public WeblogEntry getEntry() {
         return entry;
@@ -65,22 +47,6 @@ public class CommentSearchCriteria {
         this.searchText = searchText;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
     public ApprovalStatus getStatus() {
         return status;
     }
@@ -95,22 +61,6 @@ public class CommentSearchCriteria {
 
     public void setReverseChrono(boolean reverseChrono) {
         this.reverseChrono = reverseChrono;
-    }
-
-    public int getOffset() {
-        return offset;
-    }
-
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
-    public int getMaxResults() {
-        return maxResults;
-    }
-
-    public void setMaxResults(int maxResults) {
-        this.maxResults = maxResults;
     }
 
 }

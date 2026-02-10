@@ -30,6 +30,7 @@ import org.apache.roller.weblogger.pojos.User;
 import org.apache.roller.weblogger.pojos.Weblog;
 import org.apache.roller.weblogger.pojos.WeblogCategory;
 import org.apache.roller.weblogger.pojos.WeblogEntry;
+import org.apache.roller.weblogger.pojos.LuceneSearchCriteria;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,10 +52,10 @@ public class IndexManagerTest {
      */
     @BeforeEach
     public void setUp() throws Exception {
-        
+
         // setup weblogger
         TestUtils.setupWeblogger();
-        
+
         try {
             testUser = TestUtils.setupUser("entrytestuser");
             testWeblog = TestUtils.setupWeblog("entrytestweblog", testUser);
@@ -67,7 +68,7 @@ public class IndexManagerTest {
 
     @AfterEach
     public void tearDown() throws Exception {
-        
+
         try {
             TestUtils.teardownWeblog(testWeblog.getId());
             TestUtils.teardownUser(testUser.getUserName());
@@ -87,14 +88,18 @@ public class IndexManagerTest {
         List<WeblogEntry> entries = createWeblogEntries(testWeblog, indexManager, entryManager);
 
         try {
-            SearchResultList result = indexManager.search("Enterprise",
-                testWeblog.getHandle(), null, testWeblog.getLocale(), 0, RESULTS_PER_PAGE,
-                WebloggerFactory.getWeblogger().getUrlStrategy());
+            LuceneSearchCriteria criteria = new LuceneSearchCriteria();
+            criteria.setTerm("Enterprise");
+            criteria.setWeblogHandle(testWeblog.getHandle());
+            criteria.setLocale(testWeblog.getLocale());
+            criteria.setOffset(0);
+            criteria.setMaxResults(RESULTS_PER_PAGE);
+
+            SearchResultList result = indexManager.search(criteria, WebloggerFactory.getWeblogger().getUrlStrategy());
             assertEquals(2, result.getResults().size());
 
-            result = indexManager.search("Tholian",
-                testWeblog.getHandle(), null, testWeblog.getLocale(), 0, RESULTS_PER_PAGE,
-                WebloggerFactory.getWeblogger().getUrlStrategy());
+            criteria.setTerm("Tholian");
+            result = indexManager.search(criteria, WebloggerFactory.getWeblogger().getUrlStrategy());
             assertEquals(1, result.getResults().size());
 
         } finally {
@@ -109,27 +114,27 @@ public class IndexManagerTest {
      * Create some weblog entries, two with some Star Trek content
      */
     public static List<WeblogEntry> createWeblogEntries(
-        Weblog testWeblog,
-        IndexManager indexManager,
-        WeblogEntryManager entryManager) throws Exception {
+            Weblog testWeblog,
+            IndexManager indexManager,
+            WeblogEntryManager entryManager) throws Exception {
 
         List<WeblogEntry> entries = Instancio.ofList(WeblogEntry.class).size(10).create();
 
         entries.get(0).setTitle("The Tholian Web");
         entries.get(0).setPubTime(new Timestamp(System.currentTimeMillis()));
         entries.get(0).setText(
-            "When the Enterprise attempts to ascertain the fate of the  "
-                +"U.S.S. Defiant which vanished 3 weeks ago, the warp engines  "
-                +"begin to lose power, and Spock reports strange sensor readings.");
+                "When the Enterprise attempts to ascertain the fate of the  "
+                        + "U.S.S. Defiant which vanished 3 weeks ago, the warp engines  "
+                        + "begin to lose power, and Spock reports strange sensor readings.");
 
         Thread.sleep(500);
 
         entries.get(1).setTitle("A Piece of the Action");
         entries.get(1).setPubTime(new Timestamp(System.currentTimeMillis()));
         entries.get(1).setText(
-            "The crew of the Enterprise attempts to make contact with "
-                +"the inhabitants of planet Sigma Iotia II, and Uhura puts Kirk "
-                +"in communication with Boss Oxmyx.");
+                "The crew of the Enterprise attempts to make contact with "
+                        + "the inhabitants of planet Sigma Iotia II, and Uhura puts Kirk "
+                        + "in communication with Boss Oxmyx.");
 
         // save and index those entries
 
@@ -138,7 +143,7 @@ public class IndexManagerTest {
             // fill in relationship fields to make JPA happy
 
             WeblogCategory cat = entryManager.getWeblogCategory(
-                testWeblog.getWeblogCategory("General").getId());
+                    testWeblog.getWeblogCategory("General").getId());
             entry.setCategory(cat);
             entry.setWebsite(TestUtils.getManagedWebsite(testWeblog));
             entry.setEntryAttributes(Collections.emptySet());

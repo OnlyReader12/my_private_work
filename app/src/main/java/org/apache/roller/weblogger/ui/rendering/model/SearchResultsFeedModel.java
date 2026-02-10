@@ -29,6 +29,7 @@ import org.apache.roller.weblogger.business.URLStrategy;
 import org.apache.roller.weblogger.business.WebloggerFactory;
 import org.apache.roller.weblogger.business.search.IndexManager;
 import org.apache.roller.weblogger.business.search.SearchResultList;
+import org.apache.roller.weblogger.pojos.LuceneSearchCriteria;
 import org.apache.roller.weblogger.config.WebloggerRuntimeConfig;
 import org.apache.roller.weblogger.pojos.Weblog;
 import org.apache.roller.weblogger.pojos.wrapper.WeblogCategoryWrapper;
@@ -70,7 +71,7 @@ public class SearchResultsFeedModel implements Model {
 		return "model";
 	}
 
-    @Override
+	@Override
 	public void init(Map<String, Object> initData) throws WebloggerException {
 
 		// we expect the init data to contain a weblogRequest object
@@ -84,7 +85,7 @@ public class SearchResultsFeedModel implements Model {
 		} else {
 			throw new WebloggerException(
 					"weblogRequest is not a WeblogFeedRequest."
-					+ "  FeedModel only supports feed requests.");
+							+ "  FeedModel only supports feed requests.");
 		}
 
 		// look for url strategy
@@ -99,7 +100,7 @@ public class SearchResultsFeedModel implements Model {
 		String pagerUrl = urlStrategy.getWeblogFeedURL(weblog,
 				feedRequest.getLocale(), feedRequest.getType(),
 				// cat and term below null but added to URL in pager
-                feedRequest.getFormat(), null, null,
+				feedRequest.getFormat(), null, null,
 				null, false, true);
 
 		// if there is no query, then we are done
@@ -114,15 +115,15 @@ public class SearchResultsFeedModel implements Model {
 		// setup the search
 		IndexManager indexMgr = WebloggerFactory.getWeblogger().getIndexManager();
 		try {
-			SearchResultList searchResult = indexMgr.search(
-				feedRequest.getTerm(),
-				feedRequest.getWeblogHandle(),
-				feedRequest.getWeblogCategoryName(),
-				feedRequest.getLocale(),
-				feedRequest.getPage(),
-				entryCount,
-				urlStrategy
-			);
+			LuceneSearchCriteria criteria = new LuceneSearchCriteria();
+			criteria.setTerm(feedRequest.getTerm());
+			criteria.setWeblogHandle(feedRequest.getWeblogHandle());
+			criteria.setCategoryName(feedRequest.getWeblogCategoryName());
+			criteria.setLocale(feedRequest.getLocale());
+			criteria.setOffset(feedRequest.getPage() * entryCount);
+			criteria.setMaxResults(entryCount);
+
+			SearchResultList searchResult = indexMgr.search(criteria, urlStrategy);
 			this.hits = searchResult.getResults().size();
 			this.offset = searchResult.getOffset();
 			this.limit = searchResult.getLimit();
@@ -143,7 +144,6 @@ public class SearchResultsFeedModel implements Model {
 		return pager;
 	}
 
-
 	/**
 	 * Get weblog being displayed.
 	 */
@@ -152,9 +152,10 @@ public class SearchResultsFeedModel implements Model {
 	}
 
 	public String getTerm() {
-		String query =feedRequest.getTerm() ;
-		return (query == null) 
-			? "" : StringEscapeUtils.escapeXml11(Utilities.escapeHTML(query));
+		String query = feedRequest.getTerm();
+		return (query == null)
+				? ""
+				: StringEscapeUtils.escapeXml11(Utilities.escapeHTML(query));
 	}
 
 	public int getHits() {
@@ -192,7 +193,7 @@ public class SearchResultsFeedModel implements Model {
 	public WeblogCategoryWrapper getWeblogCategory() {
 		if (feedRequest.getWeblogCategory() != null) {
 			return WeblogCategoryWrapper.wrap(feedRequest.getWeblogCategory(),
-				urlStrategy);
+					urlStrategy);
 		}
 		return null;
 	}

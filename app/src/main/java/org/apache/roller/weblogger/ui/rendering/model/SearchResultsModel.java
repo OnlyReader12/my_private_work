@@ -32,6 +32,7 @@ import org.apache.roller.weblogger.business.URLStrategy;
 import org.apache.roller.weblogger.business.WebloggerFactory;
 import org.apache.roller.weblogger.business.search.IndexManager;
 import org.apache.roller.weblogger.business.search.SearchResultList;
+import org.apache.roller.weblogger.pojos.LuceneSearchCriteria;
 import org.apache.roller.weblogger.pojos.WeblogEntryWrapperComparator;
 import org.apache.roller.weblogger.pojos.wrapper.WeblogCategoryWrapper;
 import org.apache.roller.weblogger.pojos.wrapper.WeblogEntryWrapper;
@@ -53,7 +54,7 @@ public class SearchResultsModel extends PageModel {
 	private URLStrategy urlStrategy = null;
 
 	// the actual search results mapped by Day -> Set of entries
-    private Map<Date, Set<WeblogEntryWrapper>> results = new TreeMap<>(Collections.reverseOrder());
+	private Map<Date, Set<WeblogEntryWrapper>> results = new TreeMap<>(Collections.reverseOrder());
 
 	// the pager used by the 3.0+ rendering system
 	private SearchResultsPager pager = null;
@@ -61,7 +62,7 @@ public class SearchResultsModel extends PageModel {
 	private int hits = 0;
 	private int offset = 0;
 	private int limit = 0;
-	private Set<String> categories = new TreeSet<String>();
+	private Set<String> categories = new TreeSet<>();
 	private String errorMessage = "";
 
 	@Override
@@ -91,15 +92,15 @@ public class SearchResultsModel extends PageModel {
 		// setup the search
 		IndexManager indexMgr = WebloggerFactory.getWeblogger().getIndexManager();
 		try {
-			SearchResultList searchResultList = indexMgr.search(
-				searchRequest.getQuery(),
-				searchRequest.getWeblogHandle(),
-				searchRequest.getWeblogCategoryName(),
-				searchRequest.getLocale(),
-				searchRequest.getPageNum(),
-				RESULTS_PER_PAGE,
-				urlStrategy
-			);
+			LuceneSearchCriteria criteria = new LuceneSearchCriteria();
+			criteria.setTerm(searchRequest.getQuery());
+			criteria.setWeblogHandle(searchRequest.getWeblogHandle());
+			criteria.setCategoryName(searchRequest.getWeblogCategoryName());
+			criteria.setLocale(searchRequest.getLocale());
+			criteria.setOffset(searchRequest.getPageNum() * RESULTS_PER_PAGE);
+			criteria.setMaxResults(RESULTS_PER_PAGE);
+
+			SearchResultList searchResultList = indexMgr.search(criteria, urlStrategy);
 			hits = searchResultList.getResults().size();
 			offset = searchResultList.getOffset();
 			limit = searchResultList.getLimit();
@@ -118,24 +119,20 @@ public class SearchResultsModel extends PageModel {
 
 		// search completed, setup pager based on results
 		pager = new SearchResultsPager(
-			urlStrategy, searchRequest, results, (hits > (offset + limit)));
+				urlStrategy, searchRequest, results, (hits > (offset + limit)));
 	}
 
 	private void addEntryToResults(
-		Map<Date, Set<WeblogEntryWrapper>> results,
-		WeblogEntryWrapper entry) {
+			Map<Date, Set<WeblogEntryWrapper>> results,
+			WeblogEntryWrapper entry) {
 
 		// convert entry's each date to midnight (00m 00h 00s)
 		Date midnight = DateUtil.getStartOfDay(entry.getPubTime());
 
 		// ensure we do not get duplicates from Lucene by
 		// using a Set Collection. Entries sorted by pubTime.
-		Set<WeblogEntryWrapper> set = results.get(midnight);
-		if (set == null) {
-			// date is not mapped yet, so we need a new Set
-			set = new TreeSet<>(new WeblogEntryWrapperComparator());
-			results.put(midnight, set);
-		}
+		Set<WeblogEntryWrapper> set = results.computeIfAbsent(midnight,
+				k -> new TreeSet<>(new WeblogEntryWrapperComparator()));
 		set.add(entry);
 	}
 
@@ -161,13 +158,15 @@ public class SearchResultsModel extends PageModel {
 
 	public String getTerm() {
 		String query = searchRequest.getQuery();
-        return (query == null)
-			? "" : StringEscapeUtils.escapeXml10(query);
+		return (query == null)
+				? ""
+				: StringEscapeUtils.escapeXml10(query);
 	}
 
 	public String getRawTerm() {
-		return (searchRequest.getQuery() == null) ? "" : searchRequest
-				.getQuery();
+		return (searchRequest.getQuery() == null) ? ""
+				: searchRequest
+						.getQuery();
 	}
 
 	public int getHits() {

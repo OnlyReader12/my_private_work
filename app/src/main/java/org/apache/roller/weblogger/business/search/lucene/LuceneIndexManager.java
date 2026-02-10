@@ -51,13 +51,13 @@ import org.apache.roller.weblogger.business.InitializationException;
 import org.apache.roller.weblogger.business.URLStrategy;
 import org.apache.roller.weblogger.business.WeblogEntryManager;
 import org.apache.roller.weblogger.business.Weblogger;
-import org.apache.roller.weblogger.business.WebloggerFactory;
 import org.apache.roller.weblogger.business.search.IndexManager;
 import org.apache.roller.weblogger.business.search.SearchResultList;
 import org.apache.roller.weblogger.config.WebloggerConfig;
 import org.apache.roller.weblogger.config.WebloggerRuntimeConfig;
 import org.apache.roller.weblogger.pojos.Weblog;
 import org.apache.roller.weblogger.pojos.WeblogEntry;
+import org.apache.roller.weblogger.pojos.LuceneSearchCriteria;
 import org.apache.roller.weblogger.pojos.wrapper.WeblogEntryWrapper;
 
 /**
@@ -71,9 +71,10 @@ import org.apache.roller.weblogger.pojos.wrapper.WeblogEntryWrapper;
 public class LuceneIndexManager implements IndexManager {
 
     private IndexReader reader;
+    private static final String INDEX_ERROR_MSG = "Problem accessing index directory";
     private final Weblogger roller;
 
-    private final static Log logger = LogFactory.getFactory().getInstance(LuceneIndexManager.class);
+    private static final Log logger = LogFactory.getFactory().getInstance(LuceneIndexManager.class);
 
     private boolean searchEnabled = true;
 
@@ -84,7 +85,6 @@ public class LuceneIndexManager implements IndexManager {
     private boolean inconsistentAtStartup = false;
 
     private final ReadWriteLock rwl = new ReentrantReadWriteLock();
-
 
     /**
      * Creates a new lucene index manager. This should only be created once.
@@ -122,60 +122,81 @@ public class LuceneIndexManager implements IndexManager {
      */
     @Override
     public void initialize() throws InitializationException {
-
         // only initialize the index if search is enabled
-        if (this.searchEnabled) {
-
-            // delete index if inconsistency marker exists
-            if (indexConsistencyMarker.exists()) {
-                logger.debug("Index inconsistent: marker exists");
-                inconsistentAtStartup = true;
-                deleteIndex();
-            } else {
-                try {
-                    File makeIndexDir = new File(indexDir);
-                    if (!makeIndexDir.exists()) {
-                        makeIndexDir.mkdirs();
-                        inconsistentAtStartup = true;
-                        logger.debug("Index inconsistent: new");
-                    }
-                    indexConsistencyMarker.createNewFile();
-                } catch (IOException e) {
-                    logger.error(e);
-                }
-            }
-
-            if (indexExists()) {
-
-                // test if the index is readable, if the version is outdated or it fails we rebuild.
-                try {
-                    synchronized(this) {
-                        reader = DirectoryReader.open(getIndexDirectory());
-                    }
-                } catch (IOException | IllegalArgumentException ex) {  // IAE for incompatible codecs
-                    logger.warn("Failed to open search index, scheduling rebuild.", ex);
-                    inconsistentAtStartup = true;
-                    deleteIndex();
-                }
-            } else {
-                logger.debug("Creating index");
-                inconsistentAtStartup = true;
-                deleteIndex();
-                createIndex(getIndexDirectory());
-            }
-
-            if (inconsistentAtStartup) {
-                logger.info("Index was inconsistent. Rebuilding index in the background...");
-                try {
-                    rebuildWeblogIndex();
-                } catch (WebloggerException ex) {
-                    logger.error("ERROR: scheduling re-index operation", ex);
-                }
-            } else {
-                logger.info("Index initialized and ready for use.");
-            }
+        if (!this.searchEnabled) {
+            return;
         }
 
+        initializeSearchIndex();
+    }
+
+    private void initializeSearchIndex() {
+        // delete index if inconsistency marker exists
+        if (indexConsistencyMarker.exists()) {
+            logger.debug("Index inconsistent: marker exists");
+            inconsistentAtStartup = true;
+            deleteIndex();
+        } else {
+            createIndexDirAndMarker();
+        }
+
+        if (indexExists()) {
+            openExistingIndex();
+        } else {
+            createNewIndex();
+        }
+
+        if (inconsistentAtStartup) {
+            rebuildInconsistentIndex();
+        } else {
+            logger.info("Index initialized and ready for use.");
+        }
+    }
+
+    private void createIndexDirAndMarker() {
+        try {
+            File makeIndexDir = new File(indexDir);
+            if (!makeIndexDir.exists()) {
+                makeIndexDir.mkdirs();
+                inconsistentAtStartup = true;
+                logger.debug("Index inconsistent: new");
+            }
+            if (!indexConsistencyMarker.createNewFile()) {
+                logger.warn("Could not create index consistency marker");
+            }
+        } catch (IOException e) {
+            logger.error(e);
+        }
+    }
+
+    private void openExistingIndex() {
+        // test if the index is readable, if the version is outdated or it fails we
+        // rebuild.
+        try {
+            synchronized (this) {
+                reader = DirectoryReader.open(getIndexDirectory());
+            }
+        } catch (IOException | IllegalArgumentException ex) { // IAE for incompatible codecs
+            logger.warn("Failed to open search index, scheduling rebuild.", ex);
+            inconsistentAtStartup = true;
+            deleteIndex();
+        }
+    }
+
+    private void createNewIndex() {
+        logger.debug("Creating index");
+        inconsistentAtStartup = true;
+        deleteIndex();
+        createIndex(getIndexDirectory());
+    }
+
+    private void rebuildInconsistentIndex() {
+        logger.info("Index was inconsistent. Rebuilding index in the background...");
+        try {
+            rebuildWeblogIndex();
+        } catch (WebloggerException ex) {
+            logger.error("ERROR: scheduling re-index operation", ex);
+        }
     }
 
     @Override
@@ -209,40 +230,22 @@ public class LuceneIndexManager implements IndexManager {
     }
 
     @Override
-    public SearchResultList search(
-        String term,
-        String weblogHandle,
-        String category,
-        String locale,
-        int pageNum,
-        int entryCount,
-        URLStrategy urlStrategy) throws WebloggerException {
+    public SearchResultList search(LuceneSearchCriteria criteria, URLStrategy urlStrategy)
+            throws WebloggerException {
 
-        SearchOperation search = new SearchOperation(this);
-        search.setTerm(term);
-        boolean weblogSpecific = !WebloggerRuntimeConfig.isSiteWideWeblog(weblogHandle);
-        if (weblogSpecific) {
-            search.setWeblogHandle(weblogHandle);
-        }
-        if (category != null) {
-            search.setCategory(category);
-        }
-        if (locale != null) {
-            search.setLocale(locale);
-        }
+        SearchOperation search = new SearchOperation(this, criteria);
+        boolean weblogSpecific = !WebloggerRuntimeConfig.isSiteWideWeblog(criteria.getWeblogHandle());
 
         executeIndexOperationNow(search);
         if (search.getResultsCount() >= 0) {
             TopFieldDocs docs = search.getResults();
             ScoreDoc[] hitsArr = docs.scoreDocs;
             return convertHitsToEntryList(
-                hitsArr,
-                search,
-                pageNum,
-                entryCount,
-                weblogHandle,
-                weblogSpecific,
-                urlStrategy);
+                    hitsArr,
+                    search,
+                    criteria,
+                    weblogSpecific,
+                    urlStrategy);
         }
         throw new WebloggerException("Error executing search");
     }
@@ -273,7 +276,8 @@ public class LuceneIndexManager implements IndexManager {
         } catch (final ClassNotFoundException e) {
             logger.error("failed to lookup analyzer class: " + className, e);
             return instantiateDefaultAnalyzer();
-        } catch (final NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+        } catch (final NoSuchMethodException | InstantiationException | IllegalAccessException
+                | InvocationTargetException e) {
             logger.error("failed to instantiate analyzer: " + className, e);
             return instantiateDefaultAnalyzer();
         }
@@ -293,6 +297,7 @@ public class LuceneIndexManager implements IndexManager {
             }
         } catch (InterruptedException e) {
             logger.error("Error executing operation", e);
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -308,6 +313,7 @@ public class LuceneIndexManager implements IndexManager {
             }
         } catch (InterruptedException e) {
             logger.error("Error executing operation", e);
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -338,7 +344,7 @@ public class LuceneIndexManager implements IndexManager {
         try {
             return FSDirectory.open(Path.of(indexDir));
         } catch (IOException e) {
-            logger.error("Problem accessing index directory", e);
+            logger.error(INDEX_ERROR_MSG, e);
         }
         return null;
     }
@@ -347,47 +353,28 @@ public class LuceneIndexManager implements IndexManager {
         try {
             return DirectoryReader.indexExists(getIndexDirectory());
         } catch (IOException e) {
-            logger.error("Problem accessing index directory", e);
+            logger.error(INDEX_ERROR_MSG, e);
         }
         return false;
     }
 
-    
     private void deleteIndex() {
-        
-        try(FSDirectory directory = FSDirectory.open(Path.of(indexDir))) {
-            
+        try (FSDirectory directory = FSDirectory.open(Path.of(indexDir))) {
             String[] files = directory.listAll();
             for (String file : files) {
-                Files.delete(Path.of(indexDir, file));
+                Files.deleteIfExists(Path.of(indexDir, file));
             }
         } catch (IOException ex) {
-             logger.error("Problem accessing index directory", ex);
+            logger.error(INDEX_ERROR_MSG, ex);
         }
-
     }
 
     private void createIndex(Directory dir) {
-        IndexWriter writer = null;
-
-        try {
-
-            IndexWriterConfig config = new IndexWriterConfig(
-                    new LimitTokenCountAnalyzer(
-                            LuceneIndexManager.getAnalyzer(), 128));
-
-            writer = new IndexWriter(dir, config);
-
+        try (IndexWriter writer = new IndexWriter(dir, new IndexWriterConfig(
+                new LimitTokenCountAnalyzer(LuceneIndexManager.getAnalyzer(), 128)))) {
+            // IndexWriter closed automatically
         } catch (IOException e) {
             logger.error("Error creating index", e);
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException ex) {
-                    logger.warn("Unable to close IndexWriter.", ex);
-                }
-            }
         }
     }
 
@@ -398,7 +385,7 @@ public class LuceneIndexManager implements IndexManager {
 
     @Override
     public void shutdown() {
-        
+
         indexConsistencyMarker.delete();
 
         if (reader != null) {
@@ -414,40 +401,37 @@ public class LuceneIndexManager implements IndexManager {
      * Convert hits to entries.
      *
      * @param hits
-     *            the hits
+     *               the hits
      * @param search
-     *            the search
+     *               the search
      * @throws WebloggerException
-     *             the weblogger exception
+     *                            the weblogger exception
      */
-    static SearchResultList convertHitsToEntryList(
-        ScoreDoc[] hits,
-        SearchOperation search,
-        int pageNum,
-        int entryCount,
-        String weblogHandle,
-        boolean websiteSpecificSearch,
-        URLStrategy urlStrategy)
-        throws WebloggerException {
+    private SearchResultList convertHitsToEntryList(
+            ScoreDoc[] hits,
+            SearchOperation search,
+            LuceneSearchCriteria criteria,
+            boolean websiteSpecificSearch,
+            URLStrategy urlStrategy)
+            throws WebloggerException {
 
         List<WeblogEntryWrapper> results = new ArrayList<>();
 
         // determine offset
-        int offset = pageNum * entryCount;
-        if (offset >= hits.length) {
+        int offset = criteria.getOffset();
+        if (offset < 0 || offset >= hits.length) {
             offset = 0;
         }
 
         // determine limit
-        int limit = entryCount;
-        if (offset + limit > hits.length) {
+        int limit = criteria.getMaxResults();
+        if (limit < 0 || offset + limit > hits.length) {
             limit = hits.length - offset;
         }
 
         try {
             Set<String> categories = new TreeSet<>();
             TreeSet<String> categorySet = new TreeSet<>();
-            Weblogger roller = WebloggerFactory.getWeblogger();
             WeblogEntryManager weblogMgr = roller.getWeblogEntryManager();
 
             WeblogEntry entry;
@@ -455,12 +439,12 @@ public class LuceneIndexManager implements IndexManager {
             String handle;
             Timestamp now = new Timestamp(new Date().getTime());
             for (int i = offset; i < offset + limit; i++) {
-                doc = search.getSearcher().doc(hits[i].doc);
+                doc = search.getSearcher().storedFields().document(hits[i].doc);
                 handle = doc.getField(FieldConstants.WEBSITE_HANDLE).stringValue();
                 entry = weblogMgr.getWeblogEntry(doc.getField(FieldConstants.ID).stringValue());
 
-                if (!(websiteSpecificSearch && handle.equals(weblogHandle))
-                    && doc.getField(FieldConstants.CATEGORY) != null) {
+                if (!(websiteSpecificSearch && handle.equals(criteria.getWeblogHandle()))
+                        && doc.getField(FieldConstants.CATEGORY) != null) {
                     categorySet.add(doc.getField(FieldConstants.CATEGORY).stringValue());
                 }
 

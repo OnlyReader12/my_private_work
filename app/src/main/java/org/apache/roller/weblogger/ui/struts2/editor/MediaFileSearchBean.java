@@ -31,8 +31,7 @@ import org.apache.roller.weblogger.pojos.MediaFileFilter.SizeFilterType;
  * Bean for holding media file search criteria.
  */
 public class MediaFileSearchBean {
-    private transient ResourceBundle bundle =
-            ResourceBundle.getBundle("ApplicationResources");
+    private ResourceBundle bundle = ResourceBundle.getBundle("ApplicationResources");
 
     public static final int PAGE_SIZE = 10;
 
@@ -56,7 +55,7 @@ public class MediaFileSearchBean {
 
     // Page number of results
     private int pageNum = 0;
-    
+
     // Sort option for search results
     private int sortOption;
 
@@ -140,72 +139,78 @@ public class MediaFileSearchBean {
      * Copies data from this bean to media file filter object.
      *
      */
+    /**
+     * Copies data from this bean to media file filter object.
+     *
+     */
     public void copyTo(MediaFileFilter dataHolder) {
         dataHolder.setName(this.name);
-
-        if (!StringUtils.isEmpty(this.type)) {
-            MediaFileType filterType = null;
-            if ("mediaFileView.audio".equals(this.type)) {
-                filterType = MediaFileType.AUDIO;
-            } else if ("mediaFileView.video".equals(this.type)) {
-                filterType = MediaFileType.VIDEO;
-            } else if ("mediaFileView.image".equals(this.type)) {
-                filterType = MediaFileType.IMAGE;
-            } else if ("mediaFileView.others".equals(this.type)) {
-                filterType = MediaFileType.OTHERS;
-            } 
-
-            dataHolder.setType(filterType);
-        }
+        dataHolder.setType(mapType(this.type));
 
         if (this.size > 0) {
-            SizeFilterType sftype = SizeFilterType.EQ;
-            if ("mediaFileView.gt".equals(this.sizeFilterType)) {
-                sftype = SizeFilterType.GT;
-            } else if ("mediaFileView.ge".equals(this.sizeFilterType)) {
-                sftype = SizeFilterType.GTE;
-            } else if ("mediaFileView.eq".equals(this.sizeFilterType)) {
-                sftype = SizeFilterType.EQ;
-            } else if ("mediaFileView.le".equals(this.sizeFilterType)) {
-                sftype = SizeFilterType.LTE;
-            } else if ("mediaFileView.lt".equals(this.sizeFilterType)) {
-                sftype = SizeFilterType.LT;
-            }
-            dataHolder.setSizeFilterType(sftype);
-
-            long filterSize = this.size ;
-            if ("mediaFileView.kb".equals(this.sizeUnit)) {
-                filterSize = this.size * RollerConstants.ONE_KB_IN_BYTES;
-            } else if ("mediaFileView.mb".equals(this.sizeUnit)) {
-                    filterSize = this.size * RollerConstants.ONE_MB_IN_BYTES;
-            }
-            dataHolder.setSize(filterSize);
+            dataHolder.setSizeFilterType(mapObjectSizeFilterType(this.sizeFilterType));
+            dataHolder.setSize(calculateFilterSize(this.size, this.sizeUnit));
         }
 
         if (!StringUtils.isEmpty(this.tags)) {
             dataHolder.setTags(Arrays.asList(this.tags.split(" ")));
         }
 
-        dataHolder.setStartIndex(pageNum * PAGE_SIZE);
+        dataHolder.setOffset(pageNum * PAGE_SIZE);
+        dataHolder.setMaxResults(PAGE_SIZE + 1);
+        dataHolder.setOrder(mapOrder(this.sortOption));
+    }
 
-        // set length to fetch to one more than what is required.
-        // this would help us determine whether there are more pages
-        dataHolder.setLength(PAGE_SIZE + 1);
-
-        MediaFileOrder order;
-        switch (this.sortOption) {
-            case 0:
-                order = MediaFileOrder.NAME;
-                break;
-            case 1:
-                order = MediaFileOrder.DATE_UPLOADED;
-                break;
-            case 2:
-                order = MediaFileOrder.TYPE;
-                break;
-            default:
-                order = null;
+    private MediaFileType mapType(String type) {
+        if (StringUtils.isEmpty(type)) {
+            return null;
         }
-        dataHolder.setOrder(order);
+        if ("mediaFileView.audio".equals(type)) {
+            return MediaFileType.AUDIO;
+        } else if ("mediaFileView.video".equals(type)) {
+            return MediaFileType.VIDEO;
+        } else if ("mediaFileView.image".equals(type)) {
+            return MediaFileType.IMAGE;
+        } else if ("mediaFileView.others".equals(type)) {
+            return MediaFileType.OTHERS;
+        }
+        return null;
+    }
+
+    private SizeFilterType mapObjectSizeFilterType(String sizeFilterType) {
+        if ("mediaFileView.gt".equals(sizeFilterType)) {
+            return SizeFilterType.GT;
+        } else if ("mediaFileView.ge".equals(sizeFilterType)) {
+            return SizeFilterType.GTE;
+        } else if ("mediaFileView.eq".equals(sizeFilterType)) {
+            return SizeFilterType.EQ;
+        } else if ("mediaFileView.le".equals(sizeFilterType)) {
+            return SizeFilterType.LTE;
+        } else if ("mediaFileView.lt".equals(sizeFilterType)) {
+            return SizeFilterType.LT;
+        }
+        return SizeFilterType.EQ;
+    }
+
+    private long calculateFilterSize(long size, String sizeUnit) {
+        if ("mediaFileView.kb".equals(sizeUnit)) {
+            return size * RollerConstants.ONE_KB_IN_BYTES;
+        } else if ("mediaFileView.mb".equals(sizeUnit)) {
+            return size * RollerConstants.ONE_MB_IN_BYTES;
+        }
+        return size;
+    }
+
+    private MediaFileOrder mapOrder(int sortOption) {
+        switch (sortOption) {
+            case 0:
+                return MediaFileOrder.NAME;
+            case 1:
+                return MediaFileOrder.DATE_UPLOADED;
+            case 2:
+                return MediaFileOrder.TYPE;
+            default:
+                return null;
+        }
     }
 }

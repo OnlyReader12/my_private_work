@@ -22,15 +22,18 @@ import org.apache.roller.weblogger.business.InitializationException;
 import org.apache.roller.weblogger.business.URLStrategy;
 import org.apache.roller.weblogger.pojos.Weblog;
 import org.apache.roller.weblogger.pojos.WeblogEntry;
+import org.apache.roller.weblogger.pojos.LuceneSearchCriteria;
 
 /**
  * Interface to Roller's full-text search facility.
+ * 
  * @author Dave Johnson
  */
 public interface IndexManager {
 
     /**
      * Initialize the search system.
+     * 
      * @throws InitializationException If there is a problem during initialization.
      */
     void initialize() throws InitializationException;
@@ -48,7 +51,7 @@ public interface IndexManager {
 
     /** Add entry to index, returns immediately and operates in background */
     void addEntryIndexOperation(WeblogEntry entry) throws WebloggerException;
-    
+
     /** Re-index entry, returns immediately and operates in background */
     void addEntryReIndexOperation(WeblogEntry entry) throws WebloggerException;
 
@@ -62,15 +65,6 @@ public interface IndexManager {
     /** Remove entry from index, returns immediately and operates in background */
     void removeEntryIndexOperation(WeblogEntry entry) throws WebloggerException;
 
-    SearchResultList search(
-        String term,
-        String weblogHandle,
-        String category,
-        String locale,
-        int pageNum,
-        int entryCount,
-        URLStrategy urlStrategy
-    ) throws WebloggerException;
+    SearchResultList search(LuceneSearchCriteria criteria, URLStrategy urlStrategy)
+            throws WebloggerException;
 }
-
-

@@ -17,28 +17,27 @@
  */
 package org.apache.roller.weblogger.pojos;
 
-import java.util.Date;
 import java.util.List;
 import org.apache.roller.weblogger.pojos.WeblogEntry.PubStatus;
 
-public class WeblogEntrySearchCriteria {
+public class WeblogEntrySearchCriteria extends DateRangeSearchCriteria {
 
-    public enum SortOrder {ASCENDING, DESCENDING}
-    public enum SortBy {PUBLICATION_TIME, UPDATE_TIME}
+    public enum SortOrder {
+        ASCENDING, DESCENDING
+    }
+
+    public enum SortBy {
+        PUBLICATION_TIME, UPDATE_TIME
+    }
 
     // TODO: See if can switch from name of Category to Category object
 
-    // Weblog or null to get for all weblogs.
-    private Weblog weblog;
     // User or null to get for all users.
     private User user;
-    // Start date or null for no start date.
-    private Date startDate;
-    // End date or null for no end date.
-    private Date endDate;
     // Category name or null for all categories.
     private String catName;
-    // If provided, array of tags to search blog entries for, just one needs to match to retrieve entry
+    // If provided, array of tags to search blog entries for, just one needs to
+    // match to retrieve entry
     private List<String> tags;
     // Publication status of the weblog entry (DRAFT, PUBLISHED, etc.)
     private PubStatus status;
@@ -50,18 +49,6 @@ public class WeblogEntrySearchCriteria {
     private SortOrder sortOrder = SortOrder.DESCENDING;
 
     private String locale;
-    // Offset into results for paging
-    private int offset = 0;
-
-    private int maxResults = -1;
-
-    public Weblog getWeblog() {
-        return weblog;
-    }
-
-    public void setWeblog(Weblog weblog) {
-        this.weblog = weblog;
-    }
 
     public User getUser() {
         return user;
@@ -69,22 +56,6 @@ public class WeblogEntrySearchCriteria {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     public String getCatName() {
@@ -141,22 +112,6 @@ public class WeblogEntrySearchCriteria {
 
     public void setLocale(String locale) {
         this.locale = locale;
-    }
-
-    public int getOffset() {
-        return offset;
-    }
-
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
-    public int getMaxResults() {
-        return maxResults;
-    }
-
-    public void setMaxResults(int maxResults) {
-        this.maxResults = maxResults;
     }
 
 }
