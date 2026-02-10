@@ -23,19 +23,17 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.roller.weblogger.config.WebloggerConfig;
-import org.apache.roller.weblogger.config.WebloggerRuntimeConfig;
 import org.apache.roller.weblogger.pojos.Weblog;
 import org.apache.roller.weblogger.util.URLUtilities;
-
 
 /**
  * A Weblogger URLStrategy which builds urls for a multi-weblog environment.
  */
 public class MultiWeblogURLStrategy extends AbstractURLStrategy {
-    
-    public MultiWeblogURLStrategy() {}
-    
-    
+
+    public MultiWeblogURLStrategy() {
+    }
+
     /**
      * @inheritDoc
      */
@@ -43,61 +41,53 @@ public class MultiWeblogURLStrategy extends AbstractURLStrategy {
     public URLStrategy getPreviewURLStrategy(String previewTheme) {
         return new PreviewURLStrategy(previewTheme);
     }
-    
-    
+
     /**
-     * Get root url for a given weblog.  Optionally for a certain locale.
+     * Get root url for a given weblog. Optionally for a certain locale.
      */
     @Override
     public String getWeblogURL(Weblog weblog,
-                                            String locale,
-                                            boolean absolute) {
+            String locale,
+            boolean absolute) {
 
-        StringBuilder url = new StringBuilder();
+        StringBuilder url;
         if (absolute) {
-            String weblogAbsoluteURL =
-                WebloggerConfig.getProperty("weblog.absoluteurl." + weblog.getHandle());
+            String weblogAbsoluteURL = WebloggerConfig.getProperty("weblog.absoluteurl." + weblog.getHandle());
             if (weblogAbsoluteURL != null) {
-                url.append(weblogAbsoluteURL);
+                url = new StringBuilder(weblogAbsoluteURL);
+                url.append(getURLPrefix(weblog));
+                if (locale != null) {
+                    url.append(locale).append('/');
+                }
             } else {
-                url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
+                url = getWeblogBaseURL(weblog, locale, absolute);
             }
         } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
+            url = getWeblogBaseURL(weblog, locale, absolute);
         }
 
-        url.append('/').append(weblog.getHandle()).append('/');
-
-        if (locale != null) {
-            url.append(locale).append('/');
-        }
-
-        return url.toString();
+        return url.append(URLUtilities.getQueryString(getPreviewParams())).toString();
     }
-    
-    
+
     /**
      * Get url for a single weblog entry on a given weblog.
      */
     @Override
     public String getWeblogEntryURL(Weblog weblog,
-                                                 String locale,
-                                                 String entryAnchor,
-                                                 boolean absolute) {
-        
-        if(weblog == null || entryAnchor == null) {
+            String locale,
+            String entryAnchor,
+            boolean absolute) {
+
+        if (weblog == null || entryAnchor == null) {
             return null;
         }
-        
-        StringBuilder url = new StringBuilder();
-        
-        url.append(getWeblogURL(weblog, locale, absolute));
+
+        StringBuilder url = getWeblogBaseURL(weblog, locale, absolute);
         url.append("entry/").append(URLUtilities.encode(entryAnchor));
-        
-    return url.toString();
-}
-    
-    
+
+        return url.append(URLUtilities.getQueryString(getPreviewParams())).toString();
+    }
+
     /**
      * Get url for a single weblog media file on a given weblog.
      */
@@ -106,20 +96,18 @@ public class MultiWeblogURLStrategy extends AbstractURLStrategy {
             Weblog weblog,
             String fileAnchor,
             boolean absolute) {
-        
-        if(fileAnchor == null) {
+
+        if (fileAnchor == null) {
             return null;
         }
-        
-        StringBuilder url = new StringBuilder();
-        url.append(getWeblogURL(weblog, null, absolute));
+
+        StringBuilder url = getWeblogBaseURL(weblog, null, absolute);
         url.append("mediaresource");
         url.append('/');
         url.append(URLUtilities.encode(fileAnchor));
-        
-        return url.toString();
-    }
 
+        return url.append(URLUtilities.getQueryString(getPreviewParams())).toString();
+    }
 
     /**
      * Get url for a single weblog media file on a given weblog.
@@ -128,348 +116,320 @@ public class MultiWeblogURLStrategy extends AbstractURLStrategy {
     public String getMediaFileThumbnailURL(Weblog weblog,
             String fileAnchor,
             boolean absolute) {
-            
-        return getMediaFileURL(weblog, fileAnchor, absolute) + "?t=true";
+
+        Map<String, String> params = new HashMap<>(getPreviewParams());
+        params.put("t", "true");
+
+        StringBuilder url = getWeblogBaseURL(weblog, null, absolute);
+        url.append("mediaresource/");
+        url.append(URLUtilities.encode(fileAnchor));
+
+        return url.append(URLUtilities.getQueryString(params)).toString();
     }
 
-    
     /**
      * Get url for a single weblog entry comments on a given weblog.
      */
     @Override
     public String getWeblogCommentsURL(Weblog weblog,
-                                                    String locale,
-                                                    String entryAnchor,
-                                                    boolean absolute) {
-        
-        return getWeblogEntryURL(weblog, locale, entryAnchor, absolute)+"#comments";
+            String locale,
+            String entryAnchor,
+            boolean absolute) {
+
+        return getWeblogEntryURL(weblog, locale, entryAnchor, absolute) + "#comments";
     }
-    
-    
+
     /**
      * Get url for a single weblog entry comment on a given weblog.
      */
     @Override
     public String getWeblogCommentURL(Weblog weblog,
-                                                   String locale,
-                                                   String entryAnchor,
-                                                   String timeStamp,
-                                                   boolean absolute) {
-        
-        return getWeblogEntryURL(weblog, locale, entryAnchor, absolute)+"#comment-"+timeStamp;
+            String locale,
+            String entryAnchor,
+            String timeStamp,
+            boolean absolute) {
+
+        return getWeblogEntryURL(weblog, locale, entryAnchor, absolute) + "#comment-" + timeStamp;
     }
-    
-    
+
     /**
      * Get url for a collection of entries on a given weblog.
      */
     @Override
     public String getWeblogCollectionURL(Weblog weblog,
-                                                      String locale,
-                                                      String category,
-                                                      String dateString,
-                                                      List<String> tags,
-                                                      int pageNum,
-                                                      boolean absolute) {
-        
-        if(weblog == null) {
+            String locale,
+            String category,
+            String dateString,
+            List<String> tags,
+            int pageNum,
+            boolean absolute) {
+
+        if (weblog == null) {
             return null;
         }
-        
-        StringBuilder pathinfo = new StringBuilder(URL_BUFFER_SIZE);
-        Map<String, String> params = new HashMap<>();
-        
-        pathinfo.append(getWeblogURL(weblog, locale, absolute));
-        
+
+        StringBuilder pathinfo = getWeblogBaseURL(weblog, locale, absolute);
+        Map<String, String> params = new HashMap<>(getPreviewParams());
+
         String cat;
-        if("root".equals(category)) {
+        if ("root".equals(category)) {
             cat = null;
         } else {
             cat = category;
         }
-        
-        if(cat != null && dateString == null) {
+
+        if (cat != null && dateString == null) {
             pathinfo.append("category/").append(URLUtilities.encodePath(cat));
-            
-        } else if(dateString != null && cat == null) {
-            pathinfo.append("date/").append(dateString);  
-        
-        } else if(tags != null && !tags.isEmpty()) {
+
+        } else if (dateString != null && cat == null) {
+            pathinfo.append("date/").append(dateString);
+
+        } else if (tags != null && !tags.isEmpty()) {
             pathinfo.append("tags/").append(URLUtilities.getEncodedTagsString(tags));
         } else {
-            if(dateString != null) {
+            if (dateString != null) {
                 params.put("date", dateString);
             }
-            if(cat != null) {
+            if (cat != null) {
                 params.put("cat", URLUtilities.encode(cat));
             }
         }
 
-        if(pageNum > 0) {
+        if (pageNum > 0) {
             params.put("page", Integer.toString(pageNum));
         }
-        
+
         return pathinfo.append(URLUtilities.getQueryString(params)).toString();
     }
-    
-    
+
     /**
      * Get url for a custom page on a given weblog.
      */
     @Override
     public String getWeblogPageURL(Weblog weblog,
-                                                String locale,
-                                                String pageLink,
-                                                String entryAnchor,
-                                                String category,
-                                                String dateString,
-                                                List<String> tags,
-                                                int pageNum,
-                                                boolean absolute) {
-        
-        if(weblog == null) {
+            String locale,
+            String pageLink,
+            String entryAnchor,
+            String category,
+            String dateString,
+            List<String> tags,
+            int pageNum,
+            boolean absolute) {
+
+        if (weblog == null) {
             return null;
         }
-        
-        StringBuilder pathinfo = new StringBuilder(URL_BUFFER_SIZE);
-        Map<String, String> params = new HashMap<>();
-        
-        pathinfo.append(getWeblogURL(weblog, locale, absolute));
-        
-        if(pageLink != null) {
-            pathinfo.append("page/").append(pageLink);
-            
-            // for custom pages we only allow query params
-            if(dateString != null) {
-                params.put("date", dateString);
-            }
-            if(category != null) {
-                params.put("cat", URLUtilities.encode(category));
-            }
-            if(tags != null && !tags.isEmpty()) {
-                params.put("tags", URLUtilities.getEncodedTagsString(tags));
-            }
-            if(pageNum > 0) {
-                params.put("page", Integer.toString(pageNum));
-            }
-        } else {
-            // if there is no page link then this is just a typical collection url
+
+        if (pageLink == null) {
             return getWeblogCollectionURL(weblog, locale, category, dateString, tags, pageNum, absolute);
         }
-        
+
+        StringBuilder pathinfo = getWeblogBaseURL(weblog, locale, absolute);
+        Map<String, String> params = new HashMap<>(getPreviewParams());
+
+        pathinfo.append("page/").append(pageLink);
+
+        if (dateString != null) {
+            params.put("date", dateString);
+        }
+        if (category != null) {
+            params.put("cat", URLUtilities.encode(category));
+        }
+        if (tags != null && !tags.isEmpty()) {
+            params.put("tags", URLUtilities.getEncodedTagsString(tags));
+        }
+        if (pageNum > 0) {
+            params.put("page", Integer.toString(pageNum));
+        }
+
         return pathinfo.append(URLUtilities.getQueryString(params)).toString();
     }
-    
-    
+
     /**
      * Get url for a feed on a given weblog.
      */
     @Override
     public String getWeblogFeedURL(Weblog weblog,
-                                                String locale,
-                                                String type,
-                                                String format,
-                                                String category,
-                                                String term,
-                                                List<String> tags,
-                                                boolean excerpts,
-                                                boolean absolute) {
-        
-        if(weblog == null) {
+            String locale,
+            String type,
+            String format,
+            String category,
+            String term,
+            List<String> tags,
+            boolean excerpts,
+            boolean absolute) {
+
+        if (weblog == null) {
             return null;
         }
-        
-        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        url.append(getWeblogURL(weblog, locale, absolute));
+
+        StringBuilder url = getWeblogBaseURL(weblog, locale, absolute);
         url.append("feed/").append(type).append('/').append(format);
-        
-        Map<String, String> params = new HashMap<>();
-        if(category != null && !category.isBlank()) {
+
+        Map<String, String> params = new HashMap<>(getPreviewParams());
+        if (category != null && !category.isBlank()) {
             params.put("cat", URLUtilities.encode(category));
         }
-        if(tags != null && !tags.isEmpty()) {
-          params.put("tags", URLUtilities.getEncodedTagsString(tags));
+        if (tags != null && !tags.isEmpty()) {
+            params.put("tags", URLUtilities.getEncodedTagsString(tags));
         }
-        if(term != null && !term.isBlank()) {
+        if (term != null && !term.isBlank()) {
             params.put("q", URLUtilities.encode(term.trim()));
         }
-        if(excerpts) {
+        if (excerpts) {
             params.put("excerpts", "true");
         }
-        
+
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
-    
-    
+
     /**
      * Get url to search endpoint on a given weblog.
      */
     @Override
     public String getWeblogSearchURL(Weblog weblog,
-                                                  String locale,
-                                                  String query,
-                                                  String category,
-                                                  int pageNum,
-                                                  boolean absolute) {
-        
-        if(weblog == null) {
+            String locale,
+            String query,
+            String category,
+            int pageNum,
+            boolean absolute) {
+
+        if (weblog == null) {
             return null;
         }
-        
-        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        url.append(getWeblogURL(weblog, locale, absolute));
+
+        StringBuilder url = getWeblogBaseURL(weblog, locale, absolute);
         url.append("search");
-        
-        Map<String, String> params = new HashMap<>();
-        if(query != null) {
+
+        Map<String, String> params = new HashMap<>(getPreviewParams());
+        if (query != null) {
             params.put("q", URLUtilities.encode(query));
-            
-            // other stuff only makes sense if there is a query
-            if(category != null) {
+
+            if (category != null) {
                 params.put("cat", URLUtilities.encode(category));
             }
-            if(pageNum > 0) {
+            if (pageNum > 0) {
                 params.put("page", Integer.toString(pageNum));
             }
         }
-        
+
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
-    
-    
+
     /**
      * Get url to a resource on a given weblog.
      */
     @Override
     public String getWeblogResourceURL(Weblog weblog, String filePath, boolean absolute) {
-        
-        if(weblog == null || StringUtils.isEmpty(filePath)) {
+
+        if (weblog == null || StringUtils.isEmpty(filePath)) {
             return null;
         }
-        
-        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        url.append(getWeblogURL(weblog, null, absolute));
+
+        StringBuilder url = getWeblogBaseURL(weblog, null, absolute);
         url.append("resource/");
-        
-        if(filePath.startsWith("/")) {
+
+        if (filePath.startsWith("/")) {
             url.append(URLUtilities.encodePath(filePath.substring(1)));
         } else {
             url.append(URLUtilities.encodePath(filePath));
         }
-        
-        return url.toString();
+
+        return url.append(URLUtilities.getQueryString(getPreviewParams())).toString();
     }
-    
-    
+
     /**
      * Get url to rsd file on a given weblog.
      */
     @Override
     public String getWeblogRsdURL(Weblog weblog, boolean absolute) {
-        
-        if(weblog == null) {
+
+        if (weblog == null) {
             return null;
         }
-        
-        return getWeblogURL(weblog, null, absolute)+"rsd";
+
+        StringBuilder url = getWeblogBaseURL(weblog, null, absolute);
+        url.append("rsd");
+        return url.append(URLUtilities.getQueryString(getPreviewParams())).toString();
     }
-    
-    
+
     /**
      * Get url to JSON tags service url, optionally for a given weblog.
      */
     @Override
     public String getWeblogTagsJsonURL(Weblog weblog, boolean absolute, int pageNum) {
-        
+
         StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        if (absolute) {
-            url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
-        } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
-        }
-        
+        url.append(getContextURL(absolute));
+
         // json tags service base
         url.append("/roller-services/tagdata/");
-        
+
         // is this for a specific weblog or site-wide?
         if (weblog != null) {
             url.append("weblog/");
             url.append(weblog.getHandle());
             url.append('/');
         }
-        
+
         if (pageNum > 0) {
             url.append("?page=").append(pageNum);
         }
-        
+
         return url.toString();
     }
 
-    
     @Override
     public String getWeblogSearchFeedURLTemplate(Weblog weblog) {
-        if(weblog == null) {
+        if (weblog == null) {
             return null;
         }
-        
-        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        url.append(getWeblogURL(weblog, null, true));
+
+        StringBuilder url = getWeblogBaseURL(weblog, null, true);
         url.append("feed/entries/atom");
-        
+
         Map<String, String> params = Map.of("q", "{searchTerms}", "page", "{startPage}");
-        
+
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
 
-    
     @Override
     public String getWeblogSearchPageURLTemplate(Weblog weblog) {
-        if(weblog == null) {
+        if (weblog == null) {
             return null;
         }
-        
-        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        url.append(getWeblogURL(weblog, null, true));
+
+        StringBuilder url = getWeblogBaseURL(weblog, null, true);
         url.append("search");
-        
+
         Map<String, String> params = Map.of("q", "{searchTerms}", "page", "{startPage}");
-        
+
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
-
 
     @Override
     public String getOpenSearchSiteURL() {
-        return WebloggerRuntimeConfig.getAbsoluteContextURL() + "/roller-services/opensearch/";
+        return getContextURL(true) + "/roller-services/opensearch/";
     }
-
 
     @Override
     public String getOpenSearchWeblogURL(String weblogHandle) {
-        return WebloggerRuntimeConfig.getAbsoluteContextURL() + "/roller-services/opensearch/" + weblogHandle;
+        return getContextURL(true) + "/roller-services/opensearch/" + weblogHandle;
     }
 
     @Override
     public String getOAuthRequestTokenURL() {
-        return WebloggerRuntimeConfig.getAbsoluteContextURL() + "/roller-services/oauth/requestToken";
+        return getContextURL(true) + "/roller-services/oauth/requestToken";
     }
 
     @Override
     public String getOAuthAuthorizationURL() {
-        return WebloggerRuntimeConfig.getAbsoluteContextURL() + "/roller-services/oauth/authorize";
+        return getContextURL(true) + "/roller-services/oauth/authorize";
     }
 
     @Override
     public String getOAuthAccessTokenURL() {
-        return WebloggerRuntimeConfig.getAbsoluteContextURL() + "/roller-services/oauth/accessToken";
+        return getContextURL(true) + "/roller-services/oauth/accessToken";
     }
-    
+
 }
-
-

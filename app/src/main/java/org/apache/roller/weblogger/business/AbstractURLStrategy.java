@@ -18,124 +18,83 @@
 
 package org.apache.roller.weblogger.business;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.roller.weblogger.config.WebloggerRuntimeConfig;
+import org.apache.roller.weblogger.pojos.Weblog;
 import org.apache.roller.weblogger.util.URLUtilities;
-
 
 /**
  * An abstract Weblogger URLStrategy which implements some of the url methods
  * which are not likely to change for any alternate url strategies.
  */
 public abstract class AbstractURLStrategy implements URLStrategy {
-    
+
     static final int URL_BUFFER_SIZE = 64;
-    
-    
-    public AbstractURLStrategy() {}
-    
-    
+
+    public AbstractURLStrategy() {
+    }
+
     /**
      * Url to login page.
      */
     @Override
     public String getLoginURL(boolean absolute) {
-
-        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        if(absolute) {
-            url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
-        } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
-        }
-        
-        url.append("/roller-ui/login-redirect.rol");
-        
-        return url.toString();
+        return getContextURL(absolute) + "/roller-ui/login-redirect.rol";
     }
-    
-    
+
     /**
      * Url to logout page.
      */
     @Override
     public String getLogoutURL(boolean absolute) {
-
-        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        if(absolute) {
-            url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
-        } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
-        }
-        
-        url.append("/roller-ui/logout.rol");
-        
-        return url.toString();
+        return getContextURL(absolute) + "/roller-ui/logout.rol";
     }
-    
+
     /**
      * Url to register page.
      */
     @Override
     public String getRegisterURL(boolean absolute) {
-
-        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        if(absolute) {
-            url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
-        } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
-        }
-        
-        url.append("/roller-ui/register.rol");
-        
-        return url.toString();
+        return getContextURL(absolute) + "/roller-ui/register.rol";
     }
-    
-    
+
     /**
      * Get a url to a UI action in a given namespace, optionally specifying
      * a weblogHandle parameter if that is needed by the action.
      */
     @Override
     public String getActionURL(String action,
-                                            String namespace,
-                                            String weblogHandle,
-                                            Map<String, String> parameters,
-                                            boolean absolute) {
+            String namespace,
+            String weblogHandle,
+            Map<String, String> parameters,
+            boolean absolute) {
 
         StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        if(absolute) {
-            url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
-        } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
-        }
-        
+        url.append(getContextURL(absolute));
+
         url.append(namespace);
         url.append('/').append(action).append(".rol");
-        
+
         // put weblog handle parameter, if necessary
         Map<String, String> params = new HashMap<>();
-        if(weblogHandle != null) {
+        if (weblogHandle != null) {
             params.put("weblog", weblogHandle);
         }
-        
+
         // add custom parameters if they exist
-        if(parameters != null) {
+        if (parameters != null) {
             params.putAll(parameters);
         }
-        
-        if(!params.isEmpty()) {
+
+        if (!params.isEmpty()) {
             return url.toString() + URLUtilities.getQueryString(params);
         } else {
             return url.toString();
         }
     }
-    
-    
+
     /**
      * Get a url to add a new weblog entry.
      */
@@ -143,21 +102,15 @@ public abstract class AbstractURLStrategy implements URLStrategy {
     public String getEntryAddURL(String weblogHandle, boolean absolute) {
 
         StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        if(absolute) {
-            url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
-        } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
-        }
-        
+        url.append(getContextURL(absolute));
+
         url.append("/roller-ui/authoring/entryAdd.rol");
-        
+
         Map<String, String> params = Map.of("weblog", weblogHandle);
-        
+
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
-    
-    
+
     /**
      * Get a url to edit a specific weblog entry.
      */
@@ -165,21 +118,15 @@ public abstract class AbstractURLStrategy implements URLStrategy {
     public String getEntryEditURL(String weblogHandle, String entryId, boolean absolute) {
 
         StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        if(absolute) {
-            url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
-        } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
-        }
-        
+        url.append(getContextURL(absolute));
+
         url.append("/roller-ui/authoring/entryEdit.rol");
-        
+
         Map<String, String> params = Map.of("weblog", weblogHandle, "bean.id", entryId);
-        
+
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
-    
-    
+
     /**
      * Get a url to weblog config page.
      */
@@ -187,52 +134,46 @@ public abstract class AbstractURLStrategy implements URLStrategy {
     public String getWeblogConfigURL(String weblogHandle, boolean absolute) {
 
         StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        if(absolute) {
-            url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
-        } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
-        }
-        
+        url.append(getContextURL(absolute));
+
         url.append("/roller-ui/authoring/weblogConfig.rol");
-        
+
         Map<String, String> params = Map.of("weblog", weblogHandle);
-        
+
         return url.append(URLUtilities.getQueryString(params)).toString();
     }
-    
-    
+
     @Override
     public String getXmlrpcURL(boolean absolute) {
-
-        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        if(absolute) {
-            url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
-        } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
-        }
-        
-        url.append("/roller-services/xmlrpc");
-        
-        return url.toString();
+        return getContextURL(absolute) + "/roller-services/xmlrpc";
     }
-    
-    
+
     @Override
     public String getAtomProtocolURL(boolean absolute) {
-
-        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
-        
-        if(absolute) {
-            url.append(WebloggerRuntimeConfig.getAbsoluteContextURL());
-        } else {
-            url.append(WebloggerRuntimeConfig.getRelativeContextURL());
-        }
-        
-        url.append("/roller-services/app");
-        
-        return url.toString();
+        return getContextURL(absolute) + "/roller-services/app";
     }
-    
+
+    protected String getContextURL(boolean absolute) {
+        return absolute ? WebloggerRuntimeConfig.getAbsoluteContextURL()
+                : WebloggerRuntimeConfig.getRelativeContextURL();
+    }
+
+    protected String getURLPrefix(Weblog weblog) {
+        return "/" + weblog.getHandle() + "/";
+    }
+
+    protected Map<String, String> getPreviewParams() {
+        return Collections.emptyMap();
+    }
+
+    protected StringBuilder getWeblogBaseURL(Weblog weblog, String locale, boolean absolute) {
+        StringBuilder url = new StringBuilder(URL_BUFFER_SIZE);
+        url.append(getContextURL(absolute));
+        url.append(getURLPrefix(weblog));
+        if (locale != null) {
+            url.append(locale).append('/');
+        }
+        return url;
+    }
+
 }
