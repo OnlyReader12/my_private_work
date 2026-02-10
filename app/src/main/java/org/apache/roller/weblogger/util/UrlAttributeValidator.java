@@ -26,26 +26,25 @@ import java.util.List;
  */
 public class UrlAttributeValidator implements AttributeValidator {
 
+    private static final UrlValidator URL_VALIDATOR = new UrlValidator(new String[] { "http", "https" });
+
     @Override
     public String validate(String tag, String attr, String value, List<String> invalidTags) {
-        String[] customSchemes = { "http", "https" };
-        UrlValidator urlValidator = new UrlValidator(customSchemes);
-
         if ("a".equals(tag) && "href".equals(attr)) {
-            if (urlValidator.isValid(value)) {
+            if (URL_VALIDATOR.isValid(value)) {
                 return value;
             } else {
                 // may be it is a mailto?
                 // case <a href="mailto:pippo@pippo.com?subject=...."
                 if (value.toLowerCase().startsWith("mailto:") && value.indexOf('@') >= 0) {
                     String val1 = "http://www." + value.substring(value.indexOf('@') + 1);
-                    if (urlValidator.isValid(val1)) {
+                    if (URL_VALIDATOR.isValid(val1)) {
                         return value;
                     }
                 }
             }
         } else if (tag.matches("img|embed") && "src".equals(attr)) {
-            if (urlValidator.isValid(value)) {
+            if (URL_VALIDATOR.isValid(value)) {
                 return value;
             }
         } else if ("href".equals(attr) || "src".equals(attr)) {

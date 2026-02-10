@@ -24,27 +24,29 @@ import java.util.List;
 /**
  * Responsible for splitting HTML into tokens of tags and text.
  */
-public class HtmlTokenizer {
+public final class HtmlTokenizer {
+
+    private HtmlTokenizer() {
+        // Utility class
+    }
 
     public static List<String> tokenize(String html) {
         List<String> tokens = new ArrayList<>();
         int pos = 0;
-        String token = "";
+        StringBuilder tokenAccumulator = new StringBuilder();
         int len = html.length();
         while (pos < len) {
             char c = html.charAt(pos);
 
-            String ahead = html.substring(pos, pos > len - 4 ? len : pos + 4);
+            String ahead = html.substring(pos, Math.min(len, pos + 4));
 
             // a comment is starting
             if ("<!--".equals(ahead)) {
                 // store the current token
-                if (token.length() > 0) {
-                    tokens.add(token);
+                if (tokenAccumulator.length() > 0) {
+                    tokens.add(tokenAccumulator.toString());
+                    tokenAccumulator.setLength(0);
                 }
-
-                // clear the token
-                token = "";
 
                 // search the end of <......>
                 int end = moveToMarkerEnd(pos, "-->", html);
@@ -55,12 +57,10 @@ public class HtmlTokenizer {
             } else if ('<' == c) {
 
                 // store the current token
-                if (token.length() > 0) {
-                    tokens.add(token);
+                if (tokenAccumulator.length() > 0) {
+                    tokens.add(tokenAccumulator.toString());
+                    tokenAccumulator.setLength(0);
                 }
-
-                // clear the token
-                token = "";
 
                 // serch the end of <......>
                 int end = moveToMarkerEnd(pos, ">", html);
@@ -68,15 +68,15 @@ public class HtmlTokenizer {
                 pos = end;
 
             } else {
-                token = token + c;
+                tokenAccumulator.append(c);
                 pos++;
             }
 
         }
 
         // store the last token
-        if (token.length() > 0) {
-            tokens.add(token);
+        if (tokenAccumulator.length() > 0) {
+            tokens.add(tokenAccumulator.toString());
         }
 
         return tokens;

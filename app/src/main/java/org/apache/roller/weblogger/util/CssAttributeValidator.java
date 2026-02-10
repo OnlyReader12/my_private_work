@@ -31,6 +31,7 @@ public class CssAttributeValidator implements AttributeValidator {
     private static final Pattern stylePattern = Pattern.compile("([^\\s^:]+)\\s*:\\s*([^;]+);?");
     private static final Pattern urlStylePattern = Pattern.compile("(?i).*\\b\\s*url\\s*\\(['\"]([^)]*)['\"]\\)");
     private static final Pattern forbiddenStylePattern = Pattern.compile("(?:(expression|eval|javascript))\\s*\\(");
+    private static final UrlValidator URL_VALIDATOR = new UrlValidator(new String[] { "http", "https" });
 
     @Override
     public String validate(String tag, String attr, String value, List<String> invalidTags) {
@@ -54,9 +55,8 @@ public class CssAttributeValidator implements AttributeValidator {
             // check if valid url
             Matcher urlStyleMatcher = urlStylePattern.matcher(styleValue);
             if (urlStyleMatcher.find()) {
-                String[] customSchemes = { "http", "https" };
                 String url = urlStyleMatcher.group(1);
-                if (!new UrlValidator(customSchemes).isValid(url)) {
+                if (!URL_VALIDATOR.isValid(url)) {
                     invalidTags.add(tag + " " + attr + " " + styleValue);
                     continue;
                 }
